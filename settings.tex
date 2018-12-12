@@ -1,0 +1,91 @@
+\usepackage[utf8]{inputenc}
+% \usepackage[font=small,font={small,sf},labelfont=bf]{caption}
+% \usepackage{fontspec}
+ \usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage[pagestyles]{titlesec}
+\usepackage{titling}
+\usepackage{sectsty}
+%\usepackage[nottoc]{tocbibind}
+\usepackage{tocstyle}
+% \usepackage{tabu}
+\usepackage{booktabs}% for better rules in the table
+\usepackage[backend=bibtex,style=numeric]{biblatex}
+\addbibresource{bib.bib}
+\usepackage{float}
+\usepackage{longtable}
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+            {-2.5ex\@plus -1ex \@minus -.25ex}%
+            {1.25ex \@plus .25ex}%
+            {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
+\setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
+
+%% VARIABLES
+\pdfpagewidth 8.5in
+\pdfpageheight 11in
+
+\title{SmallKat Major Qualifying Project}
+\author{Alex Tacescu, Keion Bisland, Xavier Little}
+\date{April 2019}
+
+% \newfontfamily\headingfont[]{RobotoSlab}[
+%   Path            =   fonts/RobotoSlab/,
+%   Extension       =   .ttf,
+%   UprightFont     =   *-Regular,
+%   BoldFont        =   *-Bold
+% ]
+
+% \newfontfamily\mainfont[]{OpenSans}[
+%   Path            =   fonts/OpenSans/,
+%   Extension       =   .ttf,
+%   UprightFont     =   *-Regular,
+%   BoldFont        =   *-SemiBold,
+%   ItalicFont      =   *-Italic,
+%   BoldItalicFont  =   *-SemiBoldItalic
+% ]
+
+\newcommand{\linespacing}{1.5}
+
+%% CONFIGURATION
+\interfootnotelinepenalty = 10000 % avoid breaking footers across pages
+
+% set the heading formats
+\titleformat{\chapter}[display]
+  {\LARGE\headingfont}{\chaptertitlename\ \thechapter}{15pt}{\huge}
+\titleformat*{\section}{\LARGE\headingfont}
+\titleformat*{\subsection}{\Large\headingfont}
+\titleformat*{\paragraph}{\bfseries\headingfont}
+\renewcommand{\maketitlehooka}{\headingfont}
+
+%\setmainfont{OpenSans}
+%\renewcommand{\baselinestretch}{\linespacing}
+
+%\DeclareCaptionFormat{captionformat}{\mainfont\textbf{#1#2}#3}
+%\captionsetup[figure]{format=captionformat}
+
+% \titleformat{\chapter}[display]{\normalfont\bfseries}{}{0pt}{\Huge}
+% \newpagestyle{mystyle}
+% {\sethead[\thepage][][\chaptertitle]{}{}{\thepage}}
+% \pagestyle{mystyle}
+% \newsavebox{\mysavebox}
+% \newlength{\myrest}
+
+\iffalse
+\hypersetup{
+  pdftitle = {\title},
+  pdfkeywords = {},
+  pdfauthor = {\authors},
+  bookmarksnumbered,
+  bookmarksopen = false,
+  urlcolor = black,
+  linkcolor = black,
+  citecolor = black,
+  colorlinks = true,
+  pdfstartview = {FitH},
+}
+\fi

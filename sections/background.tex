@@ -1,0 +1,40 @@
+\section{Background}
+\label{chap:background}
+\subsection{Introduction}
+    this is a test
+\subsection{Prior Work}
+ The SmallKat project started in October 2017 as an ISP with professor Ciaraldi. The original intention of the project was to create a walking quadruped in a single term. The results of this project while being quite successful, left us wanting a much better solution, there were problems with the manufacturing of the servos and a lack of any feedback from the system. During the summer of 2018 we continued to develop and improve the platform. SmallKat V2 used much more reliable servo motors and several sensors including IMUs, pressure sensitive feet and current sensing. However due to time constraints these sensors have yet been integrated into the control system of the quadruped. Instead a reliable static walking gait was created and tested. But the lack of feedback from the servos prevented any further work on more complex walking gaits. The SmallKat MQP is the next evolution of the SmallKat quadruped series. Based on our prior work we are looking to create a new quadruped with more advanced systems than the previous two versions. This includes using pressure sensing feet with multiple sensors to allow for the triangulation of the pressure vectors, an adaptive number of IMUs which can be placed in optimal locations and custom smart servo motors capable of performing constant position, velocity and torque.
+
+\subsection{Boston Dynamics}
+    During the course of the project we reached out to Boston dynamics and arranges a conference call between our team and a group of their engineers from the spot team. We chose to reach out tho them as they are the current leader in the quadrupedal robotics field and would therefore have the most insight into the intricacies and problems that arise in the development of such a platform. We entered the meeting with a series of questions and subordinate related questions. This list comprised of:
+    \begin{itemize}
+        \item Why was the decision mate to pursue 3DOF legs instead of 4DOF as most quadrupedal animals have. 
+        \begin{itemize}
+            \item Why did you choose to abstain from a head and tail for balance and dynamics
+            \item What are some of the different gaits you have developed and why did you choose them
+            \item How have you obtained such a smooth waling gait.
+        \end{itemize}
+        \item How are your trajectories and kinematics calculated pragmatically
+            \begin{itemize}
+                \item Is a real time physics engine used
+                \item Are jacobians calculated at run time
+            \end{itemize}
+        \item What kind of sensors are used on Spot mini
+            \begin{itemize}
+                \item How is each sensor integrated and used for corrections
+                \item recommendations on where to locate each kind of sensor
+            \end{itemize}
+        \item How importance is torque control in dynamic gaits
+        \item What was the minimum control loop speed you found was necessary for smooth operation
+    \end{itemize}
+These questions stemmed a very informative conversation between ourselves and the team of engineers which comprised of 2 Electrical engineers and 1 Mechanical engineer, sadly no controls engineers were able to participate however those in attendance were very knowledgeable and were able to answer the majority of our controls related questions. From this conversation we gained a great deal of insight into the tough process that went into developing Spot mini as well as many previous robots in the Spot and big dog series.  
+
+We started off by asking about the decisions that led to them choosing to only use 3 DOF legs instead of using 4 DOF legs as most quadrupedal animals in nature do. To this we were promptly responded when possible keep the mechanism and calculations as simple as possible, they had tested 4DOF legs on previous robots and found they generally avoided using them and that everything they needed to do could be achieved using 3 DOF, In addition using only 3 DOF also cut down on the wiring, and weight in the legs and therefore lowered the inertial mass of the robot making it over all easier to control. They continued on to speak to the benefits of adding a joint near the center of the body in order to act as a spine which would be much more useful when it cam to highly dynamic gaits and motions allowing for the body to fold more and allow for a smoother transference of momentum.
+
+This followed into the choice of force sensing, For the project we chose to use an array of barometric pressure sensors encapsulated in polyurethane to calculate a pressure vector. The engineers at Boston dynamics had actually tested a similar kind of sensor and had a great deal of issues using them of their robots as the repetitive motion in walking would either damage of change the calibration of the sensor. In combination with this the temperature of the environment had a great effect of the polyurethanes ability to transmit the applied force to the sensors. This combined with the damage that would get caused to the polyurethane during outdoor testing led them to decide not to continue using this method of sensing. Instead they choose to sense force at the actuator. Their recommendation was to use current to propagate torque at the motor as they used a combination of this and a custom force sensor that they could not speak too much to due to it being part of their "robot secret sauce". 
+
+Following this we asked about the development of gaits and their choice of a trot gait in which the legs are moves in a FR, BL, BR, FL sequence instead of a more natural pace gait in which the legs are moved in a FR, BR, FL, BL sequence. Their response was different to what we had expected, in end Spot is able to perform a pace gait however it is less stable than the trot gait. The trot gait was the first successful gait the team was able to develop when working on the original spot project and therefore has had the most development put into it. Further gait development came with difficulties, the development of a bounding or galloping gait was severely hindered by the lack of an effective spine, without this the body would form an oscillating system making the robot unstable. However when mentioned the concept of a continuum spine which would result in the greatest mobility they greatly recommended against it, this was due to the uncertainty and inability to guarantee the position of the system for a given input. For all dynamic motions such as recovering from a push or jerk, they rely heavily on the IMU which in a ridged body robot they recommend placing it directly over the center of the robot however for a split body or one using a spine they recommended placing one on each segment in order to capture the motion of each independent system. 
+
+Leading from this to kinematics and trajectory planning allowed us to learn that they do use both a simulation and a real time physics engine as well as calculation all necessary jacobians at run time. This led us to asking details of their control feedback and they recommended getting a high level controller running at \~1 kHz for a smooth trajectory and a low level controller as fast as possible in order to have a stable PID loop and remove all gittering and jerkiness from the system.  
+
+
