@@ -64,6 +64,50 @@
 
     The research done by the Contact Behavior of Soft Spherical Tactile Sensors\cite{youssefian2014contact} group demonstrated a similar method for calculating a pressure vector using magnets and hall effect sensors, despite the difference the math used to convert from readings to a pressure vector proved very useful to calculate out pressure vector using the 7 sensors on the foot of the robot. 
     \subsubsection{Communication Protocol}
+   		\paragraph{Processor cycles}
+   			The main purpose of the mothervboard is to receive data from teh computer over USB HID, parse, process and distribute to the motors accordingly. After speaking with Boston dynamics and deciding that for a reliable dynamics controller we would ideally have a control loop speed of \~ 1kHz at the highest level. This means that in 1 ms the micro controller must receive 64 bytes of data from the onboard computer, parse it to determine the type of command being sent to the motors, whether it is a position, velocity or torque setpoint, popuate the buffer and send through spi to each motor assuming all read and writes to memory and gpio is atomic, the time for data transfer can be calculated. \newline
+     			
+			\begin{gather*}
+			\text{Clock Speed} = 384 \text{MHz}\\
+   			\text{Data Size} = 16 \text{bits}\\
+   			\text{SPI Transfer Speed} = 24 \frac{\text{Mbits}}{\text{s}}\\
+   			\text{Size of SPI Package}= 5\\
+   			\text{ No. Devices} = 5\\
+   			\\
+   			\\
+   			\textbf{Time per clock cycle}\\
+   			\frac{1}{\text{Clock Speed}}\\
+   			\frac{1}{384000000}\\
+   			 = 2.5*10^{-9} \tiny{\text{s}}\\
+   			 \\
+   			 \\
+   			\textbf{No. bits per leg}\\
+				\text{Data Size} * \text{Size of SPI Package} * \text{No. Devices}\\
+				= 16 \tiny{\frac{\text{bits}}{\tiny{\text{packet}}}} * 5\frac{\text{packets}}{\text{device}} * 5\text{Devices} \\
+				= 400 \tiny{\frac{\text{bits}}{\text{leg}}}\\
+				\\
+				\\
+				\textbf{No. Clock cycles per SPI bit}\\
+				\frac{\text{Clock Speed}}{\text{SPI	Transfer Speed}}\\
+				\tiny{\frac{384\text{MHz}}{24\frac{\text{MHz}}{\text{s}}}}\\ 
+				 =16\tiny{\text{Clock Cycles}}\\
+			\\
+			\\
+			\textbf{Time to update a single leg}\\
+			\text{No. Clock cycles per SPI bit} * \text{Time per clock cycle}\\
+			16 * 2.5*10^{-9}\\
+			=4*10^{-8}\text{s}\\
+			\\
+			\\
+			\textbf{Time to update all legs}\\
+			\text{Time to update a single leg} * \text{No. Legs}\\
+			4*10^{-8}* 4\\
+		    =1.6*10^{-7}\text{s}\\
+			\end{gather*}  
+			Using the same SPI channel and DMA, the total time to transfer all data to each of the legs would be \~ 1.6*10$^{-7}$s, this will allow the USB packet to be received, transmitted to the motors and the updated data returned to to the computer via an updated USB pacet. \newline
+		
+		Continuing with the assumption of atomic data transfers the use of separate SPI channels for each leg would allow for update speeds of 4*10$^{-8}$s minimizing the total time in between receiving and sending a return packet. This would be the optimal solution as it allows us to keep the 1ms round trip for usb to be keot as well as allowing for other processes to be run.  
+		
         \paragraph{Micro-controller to Micro-controller}
         The decision on how to communicate between the master micro controller and the multiple salves through out the system came down to ease of re usability. The major communication options included ${I^2c}$, SPI, Can Bus, RS485 serial and RS232 Serial. The following is a table giving pros and cons of each choice.
     \begin{table}[H]
@@ -296,5 +340,45 @@ The user control feature will have two parts: control and supervision. The contr
             \item 
             \end{itemize}
      \subsubsection{Controls Equations}
+     \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+        \hline
+            Link & a & $\alpha$ & d & $\theta$ \\
+            \hline
+            1 & 0 & $\theta_1$ + 90& 0& 0\\
+            2 & $a_1$ & 0 & 0 &$\theta_2$ \\
+            3 & $a_2$ & 0 & 0 &$\theta_3$ \\
+            4 & $a_3$ & 0 & 0 &$\theta_4$ \\
+            \hline
+            \end{tabular}
+        \caption{Table of DH parameters}
+        \label{tab:my_label}
+    \end{table}
+    
+    \begin{figure}[H]
+    \centering
+    \begin{gather*}
+    X = a_3*sin(\theta_2+\theta_3)+a_2*sin(\theta2)+a_4*sin(\theta_2+\theta_3+\theta_4)\\
+    Y = sin(\theta_1)*(a_1+a_3*cos(\theta_2+\theta_3)+a_2*cos(\theta_2)+a_4*cos(\theta_2+\theta_3+\theta_4))\\
+    Z = -cos(\theta_1)*(a_1+a_3*cos(\theta_2+\theta_3)+a_2*cos(\theta_2)+a_4*cos(\theta_2+\theta_3+\theta_4))
+    \end{gather*}
+    
+    \caption{Forward Positional Kinematics}
+    \label{fig:my_label}
+    \end{figure}
+    
+    \begin{figure}[H]
+    \centering
+    \begin{gather*}
+    X = a_3*sin(\theta_2+\theta_3)+a_2*sin(\theta2)+a_4*sin(\theta_2+\theta_3+\theta_4)\\
+    Y = sin(\theta_1)*(a_1+a_3*cos(\theta_2+\theta_3)+a_2*cos(\theta_2)+a_4*cos(\theta_2+\theta_3+\theta_4))\\
+    Z = -cos(\theta_1)*(a_1+a_3*cos(\theta_2+\theta_3)+a_2*cos(\theta_2)+a_4*cos(\theta_2+\theta_3+\theta_4))
+    \end{gather*}
+    
+    \caption{Forward torque Kinematics}
+    \label{fig:my_label}
+    \end{figure}
+
      \subsubsection{4 dof}
      \subsubsection{Motor Tests}

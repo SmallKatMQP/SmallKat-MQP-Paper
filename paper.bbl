@@ -1,0 +1,220 @@
+% $ biblatex auxiliary file $
+% $ biblatex version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\entry{chuah2012composite}{inproceedings}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Chuah}{C.}%
+     {Meng~Yee}{M.~Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Estrada}{E.}%
+     {Matthew}{M.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kim}{K.}%
+     {Sangbae}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{organization}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{CMYEMKS1}
+  \strng{fullhash}{CMYEMKS1}
+  \field{sortinit}{C}
+  \field{booktitle}{Intelligent Robots and Systems (IROS), 2012 IEEE/RSJ
+  International Conference on}
+  \field{pages}{1963\bibrangedash 1969}
+  \field{title}{Composite force sensing foot utilizing volumetric displacement
+  of a hyperelastic polymer}
+  \field{year}{2012}
+\endentry
+
+\entry{chuah2014enabling}{article}{}
+  \name{author}{2}{}{%
+    {{}%
+     {Chuah}{C.}%
+     {Meng~Yee}{M.~Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Kim}{K.}%
+     {Sangbae}{S.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{CMYKS1}
+  \strng{fullhash}{CMYKS1}
+  \field{sortinit}{C}
+  \field{number}{5}
+  \field{pages}{1693\bibrangedash 1703}
+  \field{title}{Enabling force sensing during ground locomotion: A
+  bio-inspired, multi-axis, composite force sensor using discrete pressure
+  mapping}
+  \field{volume}{14}
+  \field{journaltitle}{IEEE Sensors Journal}
+  \field{year}{2014}
+\endentry
+
+\entry{MA702}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Power}{P.}%
+     {Monolithic}{M.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{PM1}
+  \strng{fullhash}{PM1}
+  \field{sortinit}{P}
+  \field{howpublished}{\url{https://www.monolithicpower.com/pub/media/document/m/a/ma702_r1.0.pdf}}
+  \field{title}{12-Bit, Digital, Contactless MA702 Magnetic Encoder Datasheet}
+\endentry
+
+\entry{BMP280}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Sensortec}{S.}%
+     {Bosch}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SB1}
+  \strng{fullhash}{SB1}
+  \field{sortinit}{S}
+  \field{howpublished}{\url{https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BMP280-DS001-19.pdf}}
+  \field{title}{BMP280 Datasheet}
+\endentry
+
+\entry{BNO055}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {Sensortec}{S.}%
+     {Bosch}{B.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{SB1}
+  \strng{fullhash}{SB1}
+  \field{sortinit}{S}
+  \field{howpublished}{\url{https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST_BNO055_DS000_14.pdf}}
+  \field{title}{BNO055 Datasheet}
+\endentry
+
+\entry{STM32H43IIT}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {STMicroelectronics}{S.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{S1}
+  \strng{fullhash}{S1}
+  \field{sortinit}{S}
+  \field{howpublished}{\url{https://www.st.com/resource/en/datasheet/stm32h743ii.pdf}}
+  \field{title}{STM32H43IIT Datasheet}
+\endentry
+
+\entry{STM32l432KB}{misc}{}
+  \name{author}{1}{}{%
+    {{}%
+     {STMicroelectronics}{S.}%
+     {}{}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{S1}
+  \strng{fullhash}{S1}
+  \field{sortinit}{S}
+  \field{howpublished}{\url{https://www.monolithicpower.com/pub/media/document/m/a/ma702_r1.0.pdf}}
+  \field{title}{STM32L432KB Datasheet}
+\endentry
+
+\entry{tenzer2014inexpensive}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Tenzer}{T.}%
+     {Yaroslav}{Y.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Jentoft}{J.}%
+     {Leif~P}{L.~P.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Howe}{H.}%
+     {Robert~D}{R.~D.}%
+     {}{}%
+     {}{}}%
+  }
+  \strng{namehash}{TYJLPHRD1}
+  \strng{fullhash}{TYJLPHRD1}
+  \field{sortinit}{T}
+  \field{number}{3}
+  \field{pages}{89\bibrangedash 95}
+  \field{title}{Inexpensive and easily customized tactile array sensors using
+  MEMS barometers chips}
+  \field{volume}{21}
+  \field{journaltitle}{IEEE Robot. Autom. Mag}
+  \field{year}{2014}
+\endentry
+
+\entry{youssefian2014contact}{article}{}
+  \name{author}{3}{}{%
+    {{}%
+     {Youssefian}{Y.}%
+     {Sina}{S.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Rahbar}{R.}%
+     {Nima}{N.}%
+     {}{}%
+     {}{}}%
+    {{}%
+     {Torres-Jara}{T.-J.}%
+     {Eduardo}{E.}%
+     {}{}%
+     {}{}}%
+  }
+  \list{publisher}{1}{%
+    {IEEE}%
+  }
+  \strng{namehash}{YSRNTJE1}
+  \strng{fullhash}{YSRNTJE1}
+  \field{sortinit}{Y}
+  \field{number}{5}
+  \field{pages}{1435\bibrangedash 1442}
+  \field{title}{Contact behavior of soft spherical tactile sensors}
+  \field{volume}{14}
+  \field{journaltitle}{IEEE sensors Journal}
+  \field{year}{2014}
+\endentry
+
+\lossort
+\endlossort
+
+\endinput

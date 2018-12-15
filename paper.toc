@@ -1,103 +1,125 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1}Objectives}{8}{section.1}
+\contentsline {section}{\numberline {1}Objectives}{10}{section.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {1.0.0.1}Time frame}{8}{paragraph.1.0.0.1}
+\contentsline {paragraph}{\numberline {1.0.0.1}Time frame}{10}{paragraph.1.0.0.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2}Background}{8}{section.2}
+\contentsline {section}{\numberline {2}Background}{10}{section.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.1}Introduction}{8}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.1}Introduction}{10}{subsection.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.2}Prior Work}{8}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}Prior Work}{10}{subsection.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {2.3}Boston Dynamics}{8}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.3}Other Robots}{11}{subsection.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3}Research}{10}{section.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Notable Quadrupedal Robots}{11}{subsubsection.2.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1}History of Quadrupedal Robotics}{10}{subsection.3.1}
+\contentsline {paragraph}{\numberline {2.3.1.1}Boston Dynamics\IeC {\textquoteright } Spot Mini}{11}{paragraph.2.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Basic Dynamics in Quadrupeds}{10}{subsection.3.2}
+\contentsline {paragraph}{\numberline {2.3.1.2}MITs Cheetah}{11}{paragraph.2.3.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3}Gaits}{10}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {2.3.2}SmallKat V1 \& V2}{11}{subsubsection.2.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.1}What is a gait}{10}{subsubsection.3.3.1}
+\contentsline {paragraph}{\numberline {2.3.2.1}Electrical}{11}{paragraph.2.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.3.2}Types of gaits}{11}{subsubsection.3.3.2}
+\contentsline {paragraph}{\numberline {2.3.2.2}Computer Science}{11}{paragraph.2.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.4}Notable Quadrupedal Robots}{11}{subsection.3.4}
+\contentsline {subparagraph}{Embedded}{11}{section*.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.4.1}Boston Dynamics\IeC {\textquoteright } Spot Mini}{11}{subsubsection.3.4.1}
+\contentsline {subparagraph}{Kinematics and Dynamics}{11}{section*.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.4.2}MITs Cheetah}{11}{subsubsection.3.4.2}
+\contentsline {paragraph}{\numberline {2.3.2.3}Mechanical}{11}{paragraph.2.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.5}SmallKat V1 \& V2}{11}{subsection.3.5}
+\contentsline {subsection}{\numberline {2.4}Boston Dynamics}{11}{subsection.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.5.1}Electrical}{11}{subsubsection.3.5.1}
+\contentsline {section}{\numberline {3}Research}{13}{section.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.5.2}Computer Science}{11}{subsubsection.3.5.2}
+\contentsline {subsection}{\numberline {3.1}Basic Dynamics in Quadrupeds}{13}{subsection.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {3.5.3}Mechanical}{11}{subsubsection.3.5.3}
+\contentsline {subsection}{\numberline {3.2}Kinematics}{13}{subsection.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Methodology}{11}{section.4}
+\contentsline {subsubsection}{\numberline {3.2.1}Forward Kinematics}{13}{subsubsection.3.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1}Electronics Design}{11}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {3.2.2}DH Parameters}{14}{subsubsection.3.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.1}Requirements}{11}{subsubsection.4.1.1}
+\contentsline {subsection}{\numberline {3.3}Gaits}{15}{subsection.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.2}Motors}{11}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {3.3.1}What is a gait}{15}{subsubsection.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {4.1.2.1}Frequency}{12}{paragraph.4.1.2.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Types of gaits}{15}{subsubsection.3.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {4.1.2.2}Testing}{12}{paragraph.4.1.2.2}
+\contentsline {section}{\numberline {4}Methodology}{15}{section.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.3}Micro-Controllers}{13}{subsubsection.4.1.3}
+\contentsline {subsection}{\numberline {4.1}Electronics Design}{15}{subsection.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.4}IMU}{13}{subsubsection.4.1.4}
+\contentsline {subsubsection}{\numberline {4.1.1}Requirements}{15}{subsubsection.4.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.5}Foot Pressure Sensors}{13}{subsubsection.4.1.5}
+\contentsline {subsubsection}{\numberline {4.1.2}Motors}{15}{subsubsection.4.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.1.6}Communication Protocol}{14}{subsubsection.4.1.6}
+\contentsline {paragraph}{\numberline {4.1.2.1}Frequency}{16}{paragraph.4.1.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {4.1.6.1}Micro-controller to Micro-controller}{14}{paragraph.4.1.6.1}
+\contentsline {paragraph}{\numberline {4.1.2.2}Testing}{16}{paragraph.4.1.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {paragraph}{\numberline {4.1.6.2}Micro-controller to Computer}{16}{paragraph.4.1.6.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Micro-Controllers}{17}{subsubsection.4.1.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2}Software and Controls}{16}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.1.4}IMU}{17}{subsubsection.4.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.1}Low-Level Control Software}{16}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.1.5}Foot Pressure Sensors}{17}{subsubsection.4.1.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.2}Master Controller}{16}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.1.6}Communication Protocol}{18}{subsubsection.4.1.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.3}Motors}{19}{subsubsection.4.2.3}
+\contentsline {paragraph}{\numberline {4.1.6.1}Processor cycles}{18}{paragraph.4.1.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.4}IMU}{19}{subsubsection.4.2.4}
+\contentsline {paragraph}{\numberline {4.1.6.2}Micro-controller to Micro-controller}{20}{paragraph.4.1.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.5}Foot Sensor}{19}{subsubsection.4.2.5}
+\contentsline {paragraph}{\numberline {4.1.6.3}Micro-controller to Computer}{21}{paragraph.4.1.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.6}High-Level Control Software}{20}{subsubsection.4.2.6}
+\contentsline {subsection}{\numberline {4.2}Software and Controls}{21}{subsection.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.7}Software Platforms}{20}{subsubsection.4.2.7}
+\contentsline {subsubsection}{\numberline {4.2.1}Low-Level Control Software}{21}{subsubsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.8}High-Level Controller}{21}{subsubsection.4.2.8}
+\contentsline {subsubsection}{\numberline {4.2.2}Master Controller}{21}{subsubsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.2.9}Localization and User Control Software}{21}{subsubsection.4.2.9}
+\contentsline {subsubsection}{\numberline {4.2.3}Motors}{24}{subsubsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.3}Mechanical Design}{22}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.2.4}IMU}{24}{subsubsection.4.2.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.3.1}Design Considerations}{22}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.2.5}Foot Sensor}{24}{subsubsection.4.2.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.3.2}Controls Equations}{22}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.2.6}High-Level Control Software}{25}{subsubsection.4.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.3.3}4 dof}{22}{subsubsection.4.3.3}
+\contentsline {subsubsection}{\numberline {4.2.7}Software Platforms}{25}{subsubsection.4.2.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsubsection}{\numberline {4.3.4}Motor Tests}{22}{subsubsection.4.3.4}
+\contentsline {subsubsection}{\numberline {4.2.8}High-Level Controller}{26}{subsubsection.4.2.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Development and Implementation}{22}{section.5}
+\contentsline {subsubsection}{\numberline {4.2.9}Localization and User Control Software}{26}{subsubsection.4.2.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Results}{22}{section.6}
+\contentsline {subsection}{\numberline {4.3}Mechanical Design}{27}{subsection.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7}Conclusion and Future Work}{22}{section.7}
+\contentsline {subsubsection}{\numberline {4.3.1}Design Considerations}{27}{subsubsection.4.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {8}Conclusion}{22}{section.8}
+\contentsline {subsubsection}{\numberline {4.3.2}Controls Equations}{27}{subsubsection.4.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {9}Glossary}{22}{section.9}
+\contentsline {subsubsection}{\numberline {4.3.3}4 dof}{27}{subsubsection.4.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {4.3.4}Motor Tests}{27}{subsubsection.4.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5}Development and Implementation}{27}{section.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1}Electrical}{27}{subsection.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.2}Motors}{27}{subsection.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.2.1}Motherboard}{28}{subsubsection.5.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.2.2}IMU}{30}{subsubsection.5.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {5.2.3}FootSensors}{30}{subsubsection.5.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6}Results}{30}{section.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7}Conclusion and Future Work}{30}{section.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {8}Conclusion}{30}{section.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {9}Glossary}{30}{section.9}
