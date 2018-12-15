@@ -14,9 +14,13 @@
     
 \subsubsection{SmallKat V1 \& V2}
     \paragraph{Electrical}
-    
+    Developing V1 \& V2 of the smallKat project revealed a lot of neuances when it came to the electrical system. These stemmed from the lack of any form of fed back to the limited capabilities of using PWM and hobby servos. On V1 we had a very simplistic motherboard, just enough to get the system working. The purpose of the board was to breaout the 22 servo ports available of the Teensy 3.6 microcontroller, regulate the 7.4-8.4v input from the battery to 5v for the teensy and the raspberry pi zero. This board made connecting all 16 Servos much easier and cleaner. When developing the motherboard for V2 a lot more time was taken to conisder the possibilities ofwhat could be achieved from the motherboard, therefore of this version 2 IMUs were inplimented, one at the front and the other at the rear of the robot, current sensors for each of the 16 motor and usb communication between the Raspberry Pi 3 B+ and the teensy 3.5. The disadvantages of no positional or velocity feed back from the motors and ability to place the IMUs where we thought best and the limitations of using PWM. 
     \paragraph{Computer Science}
-    
+    \subparagraph{Embedded}
+    The teensy 3.5 was programed and develped for using the Arduino environment. This was done in order reduce development time due to lack of experience developing in embedded c for platform. This resulted in a number of issues arrising. Due to the target market for the arduino environment being primarily beginners and hobbyists, thre exist a great number of un necessary checks and even more layers of abstraction, inadvertantly limiting the speed we could run the robot at. Many issues with using 16 PWM channels also arrose at different points in the project as the platform is only designed to handle 12 by default, this meant a number of internal libraries had to be modified before the motors would move as expected. 
+    \subparagraph{Kinematics and Dynamics}
+    For the higher level control o the robot, kinematic, dynamic and trajectory planning calculations, Bowler Studio. Due to this program being in an early Beta stage there were a number of bugs and neuances however having the developer of the program as an advisor to the project many of these were resolved quicly and/or coulbe be worked around relitavely easily. This solution proved to be quite easy to use and allowed us to quickly develop a basic static walking gait. 
+    % Need to cite Bowler Studio in this paragraph
     \paragraph{Mechanical}
 
 \subsection{Boston Dynamics}
