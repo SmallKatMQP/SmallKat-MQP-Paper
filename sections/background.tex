@@ -1,27 +1,51 @@
+\graphicspath{ {./figures/} }
 \section{Background}
 \label{chap:background}
 \subsection{Introduction}
-    this is a test
-\subsection{Prior Work}
- The SmallKat project started in October 2017 as an ISP with professor Ciaraldi. The original intention of the project was to create a walking quadruped in a single term. The results of this project while being quite successful, left us wanting a much better solution, there were problems with the manufacturing of the servos and a lack of any feedback from the system. During the summer of 2018 we continued to develop and improve the platform. SmallKat V2 used much more reliable servo motors and several sensors including IMUs, pressure sensitive feet and current sensing. However due to time constraints these sensors have yet been integrated into the control system of the quadruped. Instead a reliable static walking gait was created and tested. But the lack of feedback from the servos prevented any further work on more complex walking gaits. The SmallKat MQP is the next evolution of the SmallKat quadruped series. Based on our prior work we are looking to create a new quadruped with more advanced systems than the previous two versions. This includes using pressure sensing feet with multiple sensors to allow for the triangulation of the pressure vectors, an adaptive number of IMUs which can be placed in optimal locations and custom smart servo motors capable of performing constant position, velocity and torque.
+%need to fix
+    As robotic systems become more complicated and the amount of computing power we have available to us increases, we have slowly seen more and more complex robot systems rise up. While many of these robots still use traditional wheels as a form of locomotion the legged robots are slowly becoming more popular. When it comes to traversing complex terrains climbing up obstacles such as stairs and rocky mountain sides there are no better systems than legged ones. As a result these robots are often designed for reconnaissance or search and rescue. Additionally the military has tested many of these robots as robotic mules. Using the robots to  carry heavy items or people through the rough battlefield terrain. Quadrupeds are complex systems to create but they are getting better and better and we may soon start to see quadrupeds being used in more and more situations where typical robotic systems just wont do.
+\subsection{Small(Kat) Beginnings}
+ The SmallKat project started in October 2017 as an Independent Study Project (ISP) with Worcester Polytechnic Institute (WPI) Professor Ciaraldi. The original intention of the project was to create the smallest possible walking quadruped we could in a single term. Using a digital 9 gram servo and a custom circuit board as the back bone of the project we were able to create a 16 degree of freedom system that very much resembled a feline. The first version barely walked and while ultimately the results of this project were quite successful, it left us wanting a much better solution. During the summer of 2018 we continued the project creating a slightly larger more advanced system. This version dubbed SmallKat V2 was significantly more successful than its predecessor. It was more reliably designed and used much more reliable servo motors and several sensors including IMUs, pressure sensitive feet and current sensing. Additionally a reliable static walking gait was created and tested allowing it become WPI's most successful quadrupedal robotic system. Two versions of SmallKat V2 were built, aptly named Crimson and Gray they have been demoed at many of WPI's undergraduate robotics demonstrations. 
+     \begin{figure}[H]
+        \centering
+        \includegraphics[width=120mm]{figures/V1andV2.jpg}
+        \caption{SmallKat Versions 1, 2 and 2.1 during an undergraduate robotics lab demonstration}
+        \label{fig:my_label}
+    \end{figure}
+\subsubsection{SmallKat V1 \& V2}
+    \paragraph{Electrical}
+    Developing V1 \& V2 of the SmallKat project revealed a lot of nuances when it came to the electrical system. These stemmed from the lack of any form of fed back due to the limited capabilities of using PWM and hobby servos. On V1 we had a very simplistic motherboard, just enough to get the system working. The purpose of the board was to breakout the 22 servo ports available on the Teensy 3.5 micro-controller as well as regulate the 7.4-8.4v input from the battery to 5v for the Teensy and the raspberry pi zero. This board made connecting all 16 Servos much easier and cleaner. When developing the motherboard for V2 a lot more time was taken to consider the possibilities of what could be achieved from the motherboard. On version 2, USB communication between the Raspberry Pi 3 B+ and the Teensy 3.5 was used to increase communication speed. IMUs were implemented at the front and rear of the robot along with current sensors for each of the 16 motor. Integration of these sensors were our attempt to combat the lack of feedback from our system. While we still had no direct positional or velocity feed back from the motors we could still attempt to implement a rough closed loop control using IMU data or determine the torque on the motors using the current sensing. Additional pressure sensors were added in the feet to detect when the robot was in contact with the ground. Due to time constraints these sensors have yet to be fully implemented into the control system of SmallKat V2.
+    \paragraph{Computer Science}
+    \subparagraph{Embedded}
+    The Teensy 3.5 was programmed and developed through the Arduino environment. This was done in order to reduce the development time. However, this resulted in a number of issues arising. Because the target market for the Arduino environment is primarily beginners and hobbyists, there exist a great number of unnecessary checks and even more unnecessary layers of abstraction. This inadvertently limited the speed we could run the robot at. Many issues with using 16 PWM channels also arose at different points in the project as the platform is only designed to handle 12 by default, this meant a number of internal libraries had to be modified before the motors would move as expected. 
+    \subparagraph{Kinematics and Dynamics}
+    For the higher level control of the robot a program called Bowler Studio was used. This program was developed by WPI graduate and Undergraduate Robotics Lab Manger Kevin Harrington. All the kinematic, dynamic and trajectory planning calculations were done using bowler and then sent to the robots using the HID protocol. Due to this program being in an early Beta stage there were a number of bugs that slowed the progress of the project. However having the developer of the program as an advisor to the project many of these were resolved quickly and/or could be be worked around relatively easily. This solution proved to be quite easy to use and allowed us to quickly develop a basic static walking gait. 
+    % Need to cite Bowler Studio in this paragraph
+    \paragraph{Mechanical}
+    the mechanical aspect of the SmallKat system is centered around the servo for the system. For version 1 we used a small 9 gram digital servo. These provided a high amount of torque for their size. However they had a tendency to seize up if they were rotated not under their own power. Additionally the plastic used to house them was brittle and the small flanges used to hold them in place would often break. Other design flaws of the V1 system included hard to reach bolts and cheap screws used to connect each link to the servo horn. These screws would often strip when removed which happened often because the links would have to be adjusted. Version 2 fixed many of these problems. The servos were held inside each link with a cover instead of bolting through the flanges. Additionally a thin straight lever arm was used to connect each joint to the servo. This was pressed on after the link was already installed allowing for it to be easily adjusted. From version 1 to 2 the overall design and look didn't change. The robot had 4 legs wit 3 degrees of freedom and were situated underneath the body along with movable head and tail. While very similar in design to other quadrupedal systems The cat like features brought a smile to many faces.
+    \subsubsection{SmallKat V3}
+    The SmallKat MQP is the next evolution of the SmallKat quadruped series. Based on our prior work we are looking to create a new quadruped with more advanced systems than the previous two versions to allow  us to experiment with more complicated walking gaits and control systems.
 
 \subsection{Other Robots}
 \subsubsection{Notable Quadrupedal Robots}
-    \paragraph{Boston Dynamics’ Spot Mini}
-    
+Boston Dynamics is currently one of the leaders in quadrupedal and bipedal systems. Their robots are the source of much inspiration for people attempting to create quadruped systems. They have created a variety of quadrupeds each with different capabilities
+\paragraph{Boston Dynamics’ Spot Mini}
+SpotMini is a quadruped system designed and built by Boston Dynamics. It is a small agile system intended to be used in a variety of applications such as the home, office or outdoors. It stands at .83 meters tall and weighs 25kg. SpotMini is all-electric and can go for about 90 minutes on a single charge, depending on what it is doing.     
+     \begin{figure}[H]
+        \centering
+        \includegraphics[width=120mm]{figures/SpotMini.jpg}
+        \caption{Boston Dynamics Spot Mini}
+        \label{fig:my_label}
+    \end{figure}
+SpotMini uses 4, 3 DOF legs to move itself around. It sports a 5kg, 5 DOF arm that it can use to pick things up and open doors. The sensor suite on board SpotMini and includes stereo cameras, depth cameras, an IMU, and position/force sensors in the limbs. These sensors help with navigation and mobile manipulation. SpotMini's dynamic control is unparalleled by any other quadruped system. The robot's movement is fluid and almost life like and it is able to navigate complex terrain and stairs. SpotMini can often be seen on YouTube were Boston Dynamics posts the robots new abilities and accomplishments. They plan on being able to commercial produce spot mini as a research platforms and for use in offices and homes.
+\begin{figure}[H]
+        \centering
+        \includegraphics[width=120mm]{figures/SpotMiniwithArm.jpg}
+        \caption{Spot Mini with Arm}
+        \label{fig:my_label}
+    \end{figure}
+
     \paragraph{MITs Cheetah}
-    
-    
-\subsubsection{SmallKat V1 \& V2}
-    \paragraph{Electrical}
-    Developing V1 \& V2 of the smallKat project revealed a lot of neuances when it came to the electrical system. These stemmed from the lack of any form of fed back to the limited capabilities of using PWM and hobby servos. On V1 we had a very simplistic motherboard, just enough to get the system working. The purpose of the board was to breaout the 22 servo ports available of the Teensy 3.6 microcontroller, regulate the 7.4-8.4v input from the battery to 5v for the teensy and the raspberry pi zero. This board made connecting all 16 Servos much easier and cleaner. When developing the motherboard for V2 a lot more time was taken to conisder the possibilities ofwhat could be achieved from the motherboard, therefore of this version 2 IMUs were inplimented, one at the front and the other at the rear of the robot, current sensors for each of the 16 motor and usb communication between the Raspberry Pi 3 B+ and the teensy 3.5. The disadvantages of no positional or velocity feed back from the motors and ability to place the IMUs where we thought best and the limitations of using PWM. 
-    \paragraph{Computer Science}
-    \subparagraph{Embedded}
-    The teensy 3.5 was programed and develped for using the Arduino environment. This was done in order reduce development time due to lack of experience developing in embedded c for platform. This resulted in a number of issues arrising. Due to the target market for the arduino environment being primarily beginners and hobbyists, thre exist a great number of un necessary checks and even more layers of abstraction, inadvertantly limiting the speed we could run the robot at. Many issues with using 16 PWM channels also arrose at different points in the project as the platform is only designed to handle 12 by default, this meant a number of internal libraries had to be modified before the motors would move as expected. 
-    \subparagraph{Kinematics and Dynamics}
-    For the higher level control o the robot, kinematic, dynamic and trajectory planning calculations, Bowler Studio. Due to this program being in an early Beta stage there were a number of bugs and neuances however having the developer of the program as an advisor to the project many of these were resolved quicly and/or coulbe be worked around relitavely easily. This solution proved to be quite easy to use and allowed us to quickly develop a basic static walking gait. 
-    % Need to cite Bowler Studio in this paragraph
-    \paragraph{Mechanical}
 
 \subsection{Boston Dynamics}
     During the course of the project we reached out to Boston dynamics and arranges a conference call between our team and a group of their engineers from the spot team. We chose to reach out tho them as they are the current leader in the quadrupedal robotics field and would therefore have the most insight into the intricacies and problems that arise in the development of such a platform. We entered the meeting with a series of questions and subordinate related questions. This list comprised of:
