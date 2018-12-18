@@ -10,7 +10,7 @@
 \usepackage[pagestyles]{titlesec}
 \usepackage{titling}
 \usepackage{sectsty}
-%\usepackage[nottoc]{tocbibind}
+\usepackage{caption}
 \usepackage{tocstyle}
 % \usepackage{tabu}
 \usepackage{booktabs}% for better rules in the table
@@ -26,6 +26,9 @@
 \setcounter{secnumdepth}{4} % how many sectioning levels to assign numbers to
 \setcounter{tocdepth}{4}    % how many sectioning levels to show in ToC
 
+
+\newcommand\scalemath[2]{\scalebox{#1}{\mbox{\ensuremath{\displaystyle #2}}}}
+\usepackage[]{algorithm2e}
 %% VARIABLES
 \pdfpagewidth 8.5in
 \pdfpageheight 11in

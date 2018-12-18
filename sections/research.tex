@@ -6,7 +6,7 @@
     Forward Kinematics refers to the use of kinematic equations to determine the position, usually in x, y, z coordinate space, of an end effector given specific joint parameters with relation to a specific reference point. In the case of a serial manipulator, this is very useful in understanding where the end of the robot will be if given a set of joint values. There are many different ways of calculating forward kinematics, however one of the most universally accepted and used methods is through the use of Denavit–Hartenberg parameters (DH parameters).
     \begin{figure}[H]
         \centering
-        \includegraphics[width=150mm]{3dof.PNG}
+        \includegraphics[width=0.8\textwidth]{3dof.PNG}
         \caption{Forward Kinematic equations for a 3 DOF system}
         \label{fig:my_label}
     \end{figure}
@@ -27,14 +27,14 @@
     This convention allows the definition of the movement of links around a common joint axis Si by the screw displacement,
     \begin{figure}[H]
         \centering
-        \includegraphics[width=150mm]{xframe.PNG}
+        \includegraphics[width=0.7\textwidth]{xframe.PNG}
         \caption{Rotation Matrix for X axis}
         \label{fig:my_label}
     \end{figure}
     where θi is the rotation around and di is the slide along the Z axis. Depending on how the robot is constructed either of the parameters θ or d can be constants. The dimensions of each link in the serial chain are defined by the screw displacement around the common normal Ai,i+1 from the joint Si to Si+1, which is given by
     \begin{figure}[H]
         \centering
-        \includegraphics[width=150mm]{zframe.PNG}
+        \includegraphics[width=0.7\textwidth]{zframe.PNG}
         \caption{Rotation Matrix for Z axis}
         \label{fig:my_label}
     \end{figure}
@@ -76,26 +76,34 @@
     Combining everything we have discussed, the screw displacement, transformation matrix and d-h parameters we get a matrix that looks like the following;
      \begin{figure}[H]
         \centering
-        \includegraphics[width=150mm]{Matrizx.PNG}
+        \includegraphics[width=0.7\textwidth]{Matrizx.PNG}
         \caption{Transformation matrix}
         \label{fig:my_label}
     \end{figure}
     By placing reference frames using the rules above and using this matrix, the forward kinematics of any serial manipulator can be easily determined where the x,y,z of the end effector is described as the 3x1 matrix $[T_x; T_y; T_z]$ in the result of the final matrix; 
      \begin{figure}[H]
         \centering
-        \includegraphics[width=150mm]{Matrix2.PNG}
+        \includegraphics[width=0.7\textwidth]{Matrix2.PNG}
         \caption{Resulting matrix}
         \label{fig:my_label}
     \end{figure}
-\subsection{Inverse Kinematics}
-\subsection{Jacobians}
-\subsection{Torque Propogation}
-\subsection{Dynamics}
+% \subsection{Inverse Kinematics}
+% \subsection{Jacobians}
+% \subsection{Torque Propogation}
+% \subsection{Dynamics}
 \subsection{Gaits}
     \subsubsection{What is a gait}
-    A gait is the motion of taking  a step. This includes the motion of each joint, the time at each place, the speed of motion and the time between cycles. In the case of a quadruped robot, the 
+   Gait is the pattern of movement of the limbs of animals. Most animals use a variety of gaits, selecting gait based on speed, terrain, the need to maneuver, and energetic efficiency.\cite{wikipedia_2018_Gaits}.  
     
     \subsubsection{Types of gaits}
+    There are two general categories of gaits under which all others fall, these are Symmetric and Asymmetric gaits. A symmetric gait is defined when the left and right limbs alternate. where as an asymmetric gait, the legs move in unison. Examples of these gaits can be seen below.  
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\textwidth]{figures/Gait_graphs_v2.png}
+        \caption{Graphic showing motion in types of gaits}
+        \label{fig:my_label}
+    \end{figure}
+   
     
 
 

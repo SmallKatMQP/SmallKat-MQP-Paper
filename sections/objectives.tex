@@ -1,13 +1,14 @@
 \section{Objectives}
 The purpose of this project is two fold.
-\subsection*{Mechanical Objectives}
+\subsection{Mechanical Objectives}
 \begin{enumerate}
   \item{}
-  \item{Objective 2}
+  \item{}
 \end{enumerate}
 
-\subsection*{Electrical Objectives}
-
-\subsection*{Software Objectives}
+\subsection{Electrical Objectives}
+Develop a series of custom electronics and sensors including custom motors that provide feedback on torque, position and velocity as well as independent, tunable PID controllers for each of those running at 1kHz\+. A motherboard that is able to communicate between a computer and all sensor boards over USB HID. Configurable IMUs with integrated sensor fusion allowing to the request of a given type of data including Accelerometer, Gyroscope or Euler angles. Foot sensors combining 9 barometric pressure sensors to be encapsulated in a low durometer polyurethane allowing for a force vector to e calculated based on the readings of each sensor. 
+In combination with all of these sensors the system will be written in embedded C/C++ in order to ensure a reliable and fast system. All sensors will be able to be daisy chained via an SPI bus sharing the same chip select line passing data from one device to the next. 
+\subsection{Software Objectives}
 
 \paragraph{Time frame}
