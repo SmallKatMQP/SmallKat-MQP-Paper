@@ -1,14 +1,56 @@
 \section{Objectives}
-The purpose of this project is two fold.
-\subsection{Mechanical Objectives}
-\begin{enumerate}
-  \item{}
-  \item{}
-\end{enumerate}
+SmallKat is designed to full a void in the research and development of multipedal robotic systems by providing researchers with a platform to design new gaits, test sensors and motors, and teach the next generation of engineers. Where-as the current options only allow for a limited number of robots due to cost,  size, complexity, and safety constraints, SmallKat will allow for organizations to have multiple development platforms running at  the  same time,  allowing  for comparisons of components and walking gaits.
 
-\subsection{Electrical Objectives}
-Develop a series of custom electronics and sensors including custom motors that provide feedback on torque, position and velocity as well as independent, tunable PID controllers for each of those running at 1kHz\+. A motherboard that is able to communicate between a computer and all sensor boards over USB HID. Configurable IMUs with integrated sensor fusion allowing to the request of a given type of data including Accelerometer, Gyroscope or Euler angles. Foot sensors combining 9 barometric pressure sensors to be encapsulated in a low durometer polyurethane allowing for a force vector to e calculated based on the readings of each sensor. 
-In combination with all of these sensors the system will be written in embedded C/C++ in order to ensure a reliable and fast system. All sensors will be able to be daisy chained via an SPI bus sharing the same chip select line passing data from one device to the next. 
-\subsection{Software Objectives}
+To achieve this goal, SmallKat will be designed as an adaptable quadruped. Therefore, it must be highly modular and easily repairable. To allow for a multitude of different gaits, SmallKat will have four degrees-of-freedom (DoF) legs, differentiating it from the vast majority of other quadrupedal platforms. Each join twill be controlled by a powerful, but standard-sized hobby servo motor with additional sensors and components to allow for various forms of feedback: position, velocity, and torque. Finally, SmallKat will have triangulated pressure foot sensors for contact point detection, and several inertial measurement units (IMUs) for added control over the body's linear velocity and angular acceleration. This will all be tied together with an easily adaptable open source software platform that encourages smooth development and testing of the SmallKat robotics platform.
 
-\paragraph{Time frame}
+\newlist{Deliverables}{itemize}{2}
+\setlist[Deliverables]{label=$\square$}
+
+\subsection*{Mechanical Objectives}
+\paragraph*{General Goals}
+\begin{Deliverables}
+    \item 4 DoF legs powered by custom hobby servo sized motors
+    \item 3D-printed rigid body with a basic head and tail for counterbalance
+\end{Deliverables}
+\paragraph*{Reach Goals}
+\begin{Deliverables}
+    \item Continuum-style tail for added realism
+    \item 2 DoF articulated spine
+    \item Jaw as a manipulator
+\end{Deliverables}
+
+\subsection*{Electrical Objectives}
+\paragraph*{General Goals}
+\begin{Deliverables}
+    \item Custom smart servo motors with an absolute encoder and torque sensing, tied together with over a 1khz control loop 
+    \item Custom 9 DoF Inertial Measurement Units for body control
+    \item Embedded SPI protocol to daisy chain motors and sensors
+    \item Powerful motherboard custom-designed to connect all the actuators and sensors to the main computer
+\end{Deliverables}
+\paragraph*{Reach Goals}
+\begin{Deliverables}
+    \item Custom foot pressure sensors to triangulate force vector on the foot
+\end{Deliverables}
+
+\subsection*{Software Objectives}
+\paragraph*{General Goals}
+\begin{Deliverables}
+    \item High speed kinematics and dynamics controller running at under 5 milliseconds 95\% of the time
+    \item Basic walking and trotting gaits
+    \item Functional remote user interface that displays debugging data
+\end{Deliverables}
+\paragraph*{Reach Goals}
+\begin{Deliverables}
+    \item Advanced dynamic walking and trotting gaits
+    \item Autonomous mapping using SLAM algorithms and perception sensors
+    \item Advanced user interface with remote 3D visualization of the current state of the robot
+\end{Deliverables}
+
+% Below is the stuff we wrote initially
+
+% \subsection{Electrical Objectives}
+% Develop a series of custom electronics and sensors including custom motors that provide feedback on torque, position and velocity as well as independent, tunable PID controllers for each of those running at 1kHz\+. A motherboard that is able to communicate between a computer and all sensor boards over USB HID. Configurable IMUs with integrated sensor fusion allowing to the request of a given type of data including Accelerometer, Gyroscope or Euler angles. Foot sensors combining 9 barometric pressure sensors to be encapsulated in a low durometer polyurethane allowing for a force vector to e calculated based on the readings of each sensor. 
+% In combination with all of these sensors the system will be written in embedded C/C++ in order to ensure a reliable and fast system. All sensors will be able to be daisy chained via an SPI bus sharing the same chip select line passing data from one device to the next. 
+% \subsection{Software Objectives}
+
+% \paragraph{Time frame}
