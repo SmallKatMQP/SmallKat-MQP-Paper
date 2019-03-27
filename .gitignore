@@ -6,3 +6,9 @@
 *.pdf
 *.xml
 *.gz
+*.code-workspace
+
+*.bib
+*.fdb_latexmk
+*.fls
+*.toc
