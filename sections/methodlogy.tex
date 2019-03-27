@@ -1,5 +1,59 @@
 \section{Methodology}
-Based on our research we have decided to take make advancements in what is considered the typical quadrupedal design. We intend on creating a system that more closely resembles a cat by implementing 4 DOF legs, continuum tail and a 1 DOF spine. Our electronic systems will include pressure sensing feet with multiple sensors to allow for the triangulation of the pressure vectors, an adaptive number of IMUs which can be placed in optimal locations and custom smart servo motors capable of performing constant position, velocity and torque. We will be creating custom control systems that will allow us to implement a variety of gaits. We hope to be able to at least create a basic walking and running gait and experiment with jumping.
+Based on our research we have decided to take make advancements in what is considered the typical quadrupedal design. We intend on creating a system that more closely resembles a cat by implementing 4 DOF legs and a continuum tail. Our electronic systems will include pressure sensing feet with multiple sensors to allow for the triangulation of the pressure vectors, an adaptive number of IMUs which can be placed in optimal locations and custom smart servo motors capable of performing constant position, velocity and torque. We will be creating custom control systems that will allow us to implement a variety of gaits. We hope to be able to at least create a basic walking and running gait and experiment with jumping.
+
+\subsection{Mechanical Design} % Talk about the Design Process
+    \subsubsection{Requirements} % Talk about the requirements we need to come up with 
+            % \begin{itemize} % I'm gonna make this a paragraph if i should even keep it here
+            % \item 
+            % \end{itemize}
+     \subsubsection{Controls Equations}
+     \begin{table}[H]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+        \hline
+            Link & a & $\alpha$ & d & $\theta$ \\
+            \hline
+            1 & 0 & $\theta_1$ + 90& 0& 0\\
+            2 & $a_1$ & 0 & 0 &$\theta_2$ \\
+            3 & $a_2$ & 0 & 0 &$\theta_3$ \\
+            4 & $a_3$ & 0 & 0 &$\theta_4$ \\
+            \hline
+            \end{tabular}
+        \caption{Table of DH parameters}
+        \label{tab:my_label}
+    \end{table}
+    
+    \begin{figure}[H]
+    \centering
+    \begin{gather*}
+    X = a_3*sin(\theta_2+\theta_3)+a_2*sin(\theta2)+a_4*sin(\theta_2+\theta_3+\theta_4)\\
+    Y = sin(\theta_1)*(a_1+a_3*cos(\theta_2+\theta_3)+a_2*cos(\theta_2)+a_4*cos(\theta_2+\theta_3+\theta_4))\\
+    Z = -cos(\theta_1)*(a_1+a_3*cos(\theta_2+\theta_3)+a_2*cos(\theta_2)+a_4*cos(\theta_2+\theta_3+\theta_4))
+    \end{gather*}
+    
+    \caption{Forward Positional Kinematics}
+    \label{fig:my_label}
+    \end{figure}
+    
+    % \begin{figure}[H]
+    % \centering
+
+    % \[
+    % J=
+    %   \begin{bmatrix}
+    %   0& a_3*c(\theta_{2+3})+a_2*c(\theta_{2+3+4})& a_3*c(\theta_{2+3})+a_4*c(\theta_{2+3+4})& a_4*c(\theta_{2+3+4})\\
+    %   c(\theta_1)*(a_1 + a_3*c(\theta_{2+3}) + a_2*c(\theta_2) + a_4*c(\theta_{2+3+4}))&-s(1)*(a_3*s(\theta_{2+3}) + a_2*s(\theta_2) + a_4*s(\theta_{2+3+4}))&-s(\theta_1)*(a_3*s(\theta_{2+3}) + a_4*s(\theta_{2+3+4}))&-a_4*s(\theta_{2+3+4})*s(\theta_1)
+    %   \end{bmatrix}
+      
+    % \]
+    
+
+    % \caption{Forward torque Kinematics}
+    % \label{fig:my_label}
+    % \end{figure}
+
+     \subsubsection{4 DoF vs 3DoF}
+
 \subsection{Electronics Design}
 
     \subsubsection{Requirements}
@@ -165,9 +219,7 @@ Based on our research we have decided to take make advancements in what is consi
         \paragraph{Micro-controller to Computer}
         There were many fewer options for communicating between a computer and the master micro controller. The major solutions included Ethernet, USB HID and uart over USB. These options each have their advantages and disadvantages. Ethernet, this requires external supporting circuitry to interface between the micro controller and computer, this combined with the priority level of the networking stack on any Debian distribution of Linux including Ubuntu eliminated this option as a viable solution. Usart over USB was a viable option as the USB communication stack is marginally higher than the networking stack however usb to Usart is limited to \~2 Mbits/s. This meant that the throughput would not be enough for the robot to function reliably. USB HID communicates a 54 kbyte packet, reliably at 1ms. The HID USB stack is also the communication stack with the highest priority in any Debian based Linux system. therefore it is the least likely to lose a packet or have a data transmission error. 
 
-\subsection{Software and Controls}
-
-\subsubsection{Low-Level Control Software} 
+\subsection{Low-Level Control Software} 
 The low level control software of the robot can be broken down into four distinct subcategories. These include the master controller, foot sensors, motors and IMUs. 
     \subsubsection{Master Controller}
     This controller receives trajectory points from the computer over USB HID, the controller then parses the data received to each motor. This controller performs calculations in order to optimize leg trajectory and paths. The data is packaged into four byte packets shown below.  
@@ -307,7 +359,7 @@ Smurlarly to the IMU, the foot sensor micro controller continuously samples the 
         \label{tab:my_label}
     \end{table}
 
-\subsubsection{Robot Kernel}
+\subsection{High Level Software: Robot Kernel}
 The kernel's main job will be to run the kinematics and dynamics engine. This includes balancing, foot-step planning, and all gaits to be developed (see gait section). To speed up development time and decrease cycle-times in certain calculations, an existing platform should ideally be used. The ideal platform has the following criteria:
 \begin{enumerate}
     \item Real-time performance with a guaranteed cycle time of under 1ms 90\% of the time (not including communication time with the Motherboard)
@@ -316,15 +368,17 @@ The kernel's main job will be to run the kinematics and dynamics engine. This in
     \item Programming language agnostic (preferred)
 \end{enumerate}
 
-\paragraph*{The Final Decision: IHMC Open Robotics Software}
-The IHMC Open Robotics Software is a libarary set developed by Florida Institute for Human and Machine Cognition (IHMC) designed to make it easier to develop bipedal and quadrupedal walking platforms. It includes a physics simulator and a kinematics calculator written in Java that will allow speedy calculations with close to real-time performance, while still offering a simple and robust development platform. The IHMC library can be split into two parts: the kinematics engine and the simulator.
+\paragraph*{The Final Decision: Bowler Kernel}
+Bowler Kernel is a low level platform designed to run at high speeds on linux machines. The entire system is also developed in Java. Bowler Kernel along with Bowler Studio was used on the previous SmallKats (V2 and V2.1). Bowler Kernel is extremely powerful when used correctly. It has a built-in kinematics engine and a default walking gait designed for general use. It creates a 'virtual robot' in an .xml document, which contains the dimensions of the real robot. Bowler Kernel also allows for more compartmentalized code than other systems, since parameters like DH Conventions, don't have to be manually inputed into the code. However, it also makes the whole system slower at run-time. Bowler Kernel is also very complex, since it attempts to have a lot of different features with little to no documentation.
 
-The kinematics engine built into the IHMC library uses the Euclid Core library (also developed by IHMC) to calculate matrices and perform rigid body transformatioins. Since this library is designed in Java, the main concern is its performance in a real-time environment. However, if designed properly, Java code can actually be faster on subsequent runs than a C++ or C application can be. This is because the Java Runtime Environment (also known as the Java Virtual Machine, or JVM) can optimize certain parts of the code by making assumptions after the first instance has run. This is true as long as the developer is careful to avoid using the garbage collector built into the JVM, since it is very computationally intensive. Java also makes development easier, since Gradle can be used to manage and pull together libraries when compiling into an executable. Finally, Java applications are cross-platform, so one executable can be run on any device with a JVM. This makes deployment on several different robots easy, since executables can be compiled locally before pushed to other robots running different processors.
+In the end, we decided to go with Bowler Kernel due to its inter-process communication (IPC) tools and our access to its creator, Kevin Harrington. One of our many goals was to develop a simple user interface. Since Bowler Kernel has a UDP Socket tool, we were able to send data, like joint angles and speeds, to a computer wirelessly, with minimal development overhead. You can read more about this in our Results Section. Additionally, having access to Kevin Harrington, the creator of Bowler Kernel and Bowler Studio, allows for us to get around the lack of documentation.
+
+\paragraph*{IHMC Open Robotics Software}
+The IHMC Open Robotics Software is a library set developed by Florida Institute for Human and Machine Cognition (IHMC) designed to make it easier to develop bipedal and quadrupedal walking platforms. It includes a physics simulator and a kinematics calculator written in Java that will allow speedy calculations with close to real-time performance, while still offering a simple and robust development platform. The IHMC library can be split into two parts: the kinematics engine and the simulator.
+
+The kinematics engine built into the IHMC library uses the Euclid Core library (also developed by IHMC) to calculate matrices and perform rigid body transformations. Since this library is designed in Java, the main concern is its performance in a real-time environment. However, if designed properly, Java code can actually be faster on subsequent runs than a C++ or C application can be. This is because the Java Runtime Environment (also known as the Java Virtual Machine, or JVM) can optimize certain parts of the code by making assumptions after the first instance has run. This is true as long as the developer is careful to avoid using the garbage collector built into the JVM, since it is very computationally intensive. Java also makes development easier, since Gradle can be used to manage and pull together libraries when compiling into an executable. Finally, Java applications are cross-platform, so one executable can be run on any device with a JVM. This makes deployment on several different robots easy, since executables can be compiled locally before pushed to other robots running different processors.
 
 The IHMC libraries also include a simulator designed to prototype software. It allows to simulates any developed code at its core instead of risking hardware. The simulator is also better integrated with the other libraries to be used, since it is developed by the same group.
-
-\paragraph*{Bowler Kernel}
-Bowler Kernel is a low level platform designed to run at high speeds on linux machines. The entire system is also developed in Java. Bowler Kernel along with Bowler Studio was used on the previous SmallKats (V2 and V2.1). Bowler Kernel is extremely powerful when used correctly. It has a built-in kinematics engine and a default walking gait designed for general use. It creates a 'virtual robot' in an .xml document, and then takes measurements required from that robot. This allows a user to modify the .xml file in simulation to ensure that the robot is in the correct orientation. It also allows for more compartmentalized code than other systems, since parameters like DH Conventions, don't have to be manually put into the code. However, it also makes the whole system slower at run-time. Bowler Kernel is also very complex, since it attempts to have a lot of different features with little to no documentation. This makes implementing it very difficult, even if you have direct access to its creator, Kevin Harrington.
 
 \paragraph*{Robot Operating System (ROS)}
 ROS, or Robot Operating System, is a widely used open-source robotics platform designed for adaptability and ease-of-bring-up for new robotic platforms. There are currently two major versions of ROS: ROS 1 and ROS 2.
@@ -332,10 +386,10 @@ ROS, or Robot Operating System, is a widely used open-source robotics platform d
 ROS 1 has been tried and tested in the real world for over a decade. It is written in C and C++ and uses TCP/IP to communicate between processes, or nodes. ROS 1 is a really powerful tool for research and development, due to its adaptability and customizability. ROS's biggest advantage is the shear amount of packages developed for it. From camera software to SLAM algorithms to kinematics engines, ROS 1's community adoption along its open-source nature has led to a surplus of open-source packages that makes development easier. However, ROS 1 has two major downfalls: its speed and its security. Since ROS 1 is built using a networking back-end, the communication speeds between nodes is slow and unreliable. Testing proved that the guaranteed real-time performance for ROS 1 is about 100ms, about 100x slower than what we need for our system. It also relies on all ports to be open for good communication, making it a security nightmare. Most robotic solutions are initially developed in ROS for quick development time, but are then ported to a custom platform once key algorithms and functions are developed. Other research and development platforms, similar to ours, use ROS as a user interface and testing suite, with custom software written to communicate with ROS and the hardware.
 
 ROS 2 is an attempt to fix the multitude of problems with ROS 1. It uses UDP sockets instead of the TCP/IP protocol for faster communication between nodes. It also implements new security protocols as a part of the platform. It is also built in a way where any language can be used, because its core is easily wrapped by any modern language. 
-However, ROS 2 still has its issues. For starters, ROS 2 is relatively new: just a few years old in a semi-stable form. It is not very feature-rich, and is not backwards compatible with ROS 1 packages (there is a backwards compatibility tool, but is very buggy at the time of writing). The second big problem is the instability of speed. ROS 2 boasts that it has been built to be real-time. However testing this claim, we found that although it could guarantee a 1ms loop 95\% of the time, the cycle time varied greatly - from 10 microseconds to 2.7 milliseconds.
+However, ROS 2 still has its issues. For starters, ROS 2 is relatively new: just a few years old in a semi-stable form. It is not very feature-rich, and is not backwards compatible with ROS 1 packages (there is a backwards compatibility tool, but is very buggy at the time of writing). The second big problem is the instability of speed. ROS 2 boasts that it has been built to be real-time. However testing this claim, we found that although it could guarantee a 1ms loop 95\% of the time, the cycle time varied greatly - from 10 microseconds to 2.7 milliseconds. Although ROS 2 may be very viable in this situation, we determined it's relatively young life as well as its low adoption in the industry made it impracticable for use.
 
 \paragraph*{Custom Platform}
-Since neither ROS nor Bowler Studio is exactly what we were looking for, a custom platform could be written. It would be likely written in C and C++ and communicate through processes using a standard inter-process communication protocol, or IPC. This would allow for our platform to be extremelly fast, only limited by the linux kernel and processor speed, while maintaining all communcation open locally. It can also be easily adapted to send data over other protocols, like SPI, USB, or TCP/IP or UDP Sockets. However, developing a custom platform is a project in itself, and adds a lot of development time and work to ensure proper stability and functionality.
+Since neither ROS nor Bowler Studio is exactly what we were looking for, a custom platform could have been written. It would be likely written in C and C++ and communicate through processes using a standard inter-process communication protocol, or IPC. This would allow for our platform to be extremely fast, limited only by the Linux kernel and processor speed, while maintaining all communication open locally. It can also be easily adapted to send data over other protocols, like SPI, USB, or TCP/IP or UDP Sockets. However, developing a custom platform is a project in itself, and adds a lot of development time and work to ensure proper stability and functionality. As fun as it sounded, we determined it was outside the scope of our project.
 
 \subsubsection{User Control System}
 The user control system will have several functions. Its first and for-most job is to act as a human-to-robot interface (HRI). This includes visualizing the current physical state of the robot as well as allowing a user the capability to control the robot. The user control system will also act as a debugging system for the developer. The ideal platform for this use-case meets the following criteria
@@ -349,11 +403,11 @@ The user control system will have several functions. Its first and for-most job 
     \item Preferably capable of interfacing with other complex sensors like cameras and LIDAR systems for future development
 \end{enumerate}
 
-\paragraph*{The Final Decision: ROS Kinetic}
-The Robot Operating System (ROS) excels in the world of human-to-robot interaction and interfacing with complex sensors. It's lack of maintainable speed is not a big factor, since a user interface that updates once every 100 milliseconds is still a very usable and functional interface. ROS also allows easy expansion of SmallKat's capabilities in the future: adding an Intel RealSense camera with ROS's many perception packages allow for a robust SLAM implementation. ROS also contains many visualization packages to help the user debug the robotl
+\paragraph*{The Final Decision: Custom User Interface over UDP}
 
-\paragraph*{Bowler Studio}
-Bowler Studio is a visual extension to Bowler Kernel discussed here. It shares many of the same weaknesses as its component. Its main problem, however, if implemented as a user control system is its lack of cross-computer communication and difficulty to use due to little to no documentation. It also doesn't include any libraries for interfacing with complex sensors for future development.
+
+\paragraph*{ROS Kinetic}
+The Robot Operating System (ROS) excels in the world of human-to-robot interaction and interfacing with complex sensors. It's lack of maintainable speed is not a big factor, since a user interface that updates once every 100 milliseconds is still a very usable and functional interface. ROS also allows easy expansion of SmallKat's capabilities in the future: adding an Intel RealSense camera with ROS's many perception packages allow for a robust SLAM implementation. ROS also contains many visualization packages to help the user debug the robot.
 
 % \subsubsection{High-Level Controller}
 % In the end, we decided to use Bowler Studio for the High-Level Controller. It offers cross-platformability and easy development due to its Java backbone. It also is relatively stable although not used much in the industry.
@@ -367,56 +421,5 @@ Bowler Studio is a visual extension to Bowler Kernel discussed here. It shares m
 % \paragraph*{User Control}
 % The user control feature will have two parts: control and supervision. The control part will allow users to initiate gaits and control them remotely from another computer. It will also allow for initiating the autonomy function built in to SmallKat. The supervision portion will give the user the capability of watching different key variables, like joint angles, relative position, and body position relative to the world. This will help with debugging while developing on SmallKat.
 
-\subsection{Mechanical Design}
-    \subsubsection{Design Considerations}
-            \begin{itemize} % I'm gonna make this a paragraph if i should even keep it here
-            \item 
-            \end{itemize}
-     \subsubsection{Controls Equations}
-     \begin{table}[H]
-        \centering
-        \begin{tabular}{|c|c|c|c|c|}
-        \hline
-            Link & a & $\alpha$ & d & $\theta$ \\
-            \hline
-            1 & 0 & $\theta_1$ + 90& 0& 0\\
-            2 & $a_1$ & 0 & 0 &$\theta_2$ \\
-            3 & $a_2$ & 0 & 0 &$\theta_3$ \\
-            4 & $a_3$ & 0 & 0 &$\theta_4$ \\
-            \hline
-            \end{tabular}
-        \caption{Table of DH parameters}
-        \label{tab:my_label}
-    \end{table}
-    
-    \begin{figure}[H]
-    \centering
-    \begin{gather*}
-    X = a_3*sin(\theta_2+\theta_3)+a_2*sin(\theta2)+a_4*sin(\theta_2+\theta_3+\theta_4)\\
-    Y = sin(\theta_1)*(a_1+a_3*cos(\theta_2+\theta_3)+a_2*cos(\theta_2)+a_4*cos(\theta_2+\theta_3+\theta_4))\\
-    Z = -cos(\theta_1)*(a_1+a_3*cos(\theta_2+\theta_3)+a_2*cos(\theta_2)+a_4*cos(\theta_2+\theta_3+\theta_4))
-    \end{gather*}
-    
-    \caption{Forward Positional Kinematics}
-    \label{fig:my_label}
-    \end{figure}
-    
-    % \begin{figure}[H]
-    % \centering
 
-    % \[
-    % J=
-    %   \begin{bmatrix}
-    %   0& a_3*c(\theta_{2+3})+a_2*c(\theta_{2+3+4})& a_3*c(\theta_{2+3})+a_4*c(\theta_{2+3+4})& a_4*c(\theta_{2+3+4})\\
-    %   c(\theta_1)*(a_1 + a_3*c(\theta_{2+3}) + a_2*c(\theta_2) + a_4*c(\theta_{2+3+4}))&-s(1)*(a_3*s(\theta_{2+3}) + a_2*s(\theta_2) + a_4*s(\theta_{2+3+4}))&-s(\theta_1)*(a_3*s(\theta_{2+3}) + a_4*s(\theta_{2+3+4}))&-a_4*s(\theta_{2+3+4})*s(\theta_1)
-    %   \end{bmatrix}
-      
-    % \]
-    
-
-    % \caption{Forward torque Kinematics}
-    % \label{fig:my_label}
-    % \end{figure}
-
-     \subsubsection{4 dof}
      \subsubsection{Motor Tests}
