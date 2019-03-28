@@ -1,6 +1,6 @@
 \graphicspath{ {./figures/} }
 
-\section{Background \& Research}
+\section{Background And Research}
     \label{chap:background}
     \subsection{Small(Kat) Beginnings}
         The SmallKat project started in October 2017 as an Independent Study Project (ISP) with Worcester Polytechnic Institute (WPI) Professor Ciaraldi. The original intention of the project was to create the smallest possible walking quadruped we could in a single term. Using a digital 9 gram servo and a custom circuit board as the back bone of the project we were able to create a 16 degree of freedom system that very much resembled a feline. The first version barely walked and while ultimately the results of this project were quite successful, it left us wanting a much better solution. During the summer of 2018 we continued the project creating a slightly larger more advanced system. This version dubbed SmallKat V2 was significantly more successful than its predecessor. It was more reliably designed and used much more reliable servo motors and several sensors including IMUs, pressure sensitive feet and current sensing. Additionally a reliable static walking gait was created and tested allowing it become WPI's most successful quadrupedal robotic system. Two versions of SmallKat V2 were built, aptly named Crimson and Gray they have been demoed at many of WPI's undergraduate robotics demonstrations. 
@@ -49,7 +49,17 @@
     \paragraph{Nymble} % https://www.indiegogo.com/projects/nybble-world-s-cutest-open-source-robotic-kitten#/
 
     \subsection{Key Concepts} %% Maybe change the name?
-        \subsubsection{The Denavit-Hartenberg Convention}
+        \subsubsection{Kinematics}
+        Kinematics is  often referred to as the geometry of motion and describes the motion of points, bodies and systems of bodies without considering the forces that describe the motion. A kinematics problem begins by describing the geometry of the system and declaring the initial conditions of any known values of position, velocity and/or acceleration of points within the system. Then, using arguments from geometry, the position, velocity and acceleration of any unknown parts of the system can be determined. Using kinematics there are a variety of different calculations that can be done to help create an accurate and useful model of a robot. 
+            \paragraph{Forward Kinematics}
+            Forward Kinematics refers to the use of kinematic equations to determine the position, usually in x, y, z coordinate space, of an end effector given specific joint parameters with relation to a specific reference point. In the case of a serial manipulator, this is very useful in understanding where the end of the robot will be if given a set of joint values. There are many different ways of calculating forward kinematics, however one of the most universally accepted and used methods is through the use of Denavit–Hartenberg parameters (DH parameters).
+            \begin{figure}[H]
+                \centering
+                \includegraphics[width=0.8\textwidth]{3dof.PNG}
+                \caption{Forward Kinematic equations for a 3 DOF system}
+                \label{fig:FWKIN_3DOF}
+            \end{figure}
+            \paragraph{The Denavit-Hartenberg Convention}
             In mechanical engineering and robotics, DH parameters are the four parameters associated with a particular convention for attaching reference frames to the links of a spatial kinematic chain, or serial robot manipulator.
             \begin{figure}[H]
                 \centering
@@ -66,16 +76,16 @@
             This convention allows the definition of the movement of links around a common joint axis Si by the screw displacement,
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=0.7\textwidth]{zframe.PNG}
-                \caption{Rotation Matrix for Z axis}t
-                \label{fig:RotationMatrixZAxis}
+                \includegraphics[width=0.7\textwidth]{xframe.PNG}
+                \caption{Rotation Matrix for X axis}t
+                \label{fig:RotationMatrixXAxis}
             \end{figure}
             where $\theta$i is the rotation around and di is the slide along the Z axis. Depending on how the robot is constructed either of the parameters $\theta$ or d can be constants. The dimensions of each link in the serial chain are defined by the screw displacement around the common normal Ai,i+1 from the joint Si to Si+1, which is given by
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=0.7\textwidth]{xframe.PNG}
-                \caption{Rotation Matrix for X axis}
-                \label{fig:RotationMatrixXAxis}
+                \includegraphics[width=0.7\textwidth]{zframe.PNG}
+                \caption{Rotation Matrix for Z axis}
+                \label{fig:RotationMatrixZAxis}
             \end{figure}
             where $\alpha$i, i+1 and ri,i+1 define the physical dimensions of the link in terms of the angle measured around and distance measured along the X axis. 
             
@@ -126,26 +136,12 @@
                 \caption{Resulting matrix}
                 \label{fig:ResultingMatrix}
             \end{figure}
-        \subsubsection{Kinematics}
-        Kinematics is  often referred to as the geometry of motion and describes the motion of points, bodies and systems of bodies without considering the forces that describe the motion. A kinematics problem begins by describing the geometry of the system and declaring the initial conditions of any known values of position, velocity and/or acceleration of points within the system. Then, using arguments from geometry, the position, velocity and acceleration of any unknown parts of the system can be determined. Using kinematics there are a variety of different calculations that can be done to help create an accurate and useful model of a robot. 
-            \paragraph*{Forward Kinematics}
-            Forward Kinematics refers to the use of kinematic equations to determine the position, usually in x, y, z coordinate space, of an end effector given specific joint parameters with relation to a specific reference point. In the case of a serial manipulator, this is very useful in understanding where the end of the robot will be if given a set of joint values. There are many different ways of calculating forward kinematics, however one of the most universally accepted and used methods is through the use of Denavit–Hartenberg parameters (DH parameters).
-            \begin{figure}[H]
-                \centering
-                \includegraphics[width=0.8\textwidth]{3dof.PNG}
-                \caption{Forward Kinematic equations for a 3 DOF system}
-                \label{fig:FWKIN_3DOF}
-            \end{figure}
-            \paragraph*{Inverse Kinematics}
 
+
+        \subsubsection{Inverse Kinematics}
         \subsubsection{Jacobians}
-
         \subsubsection{Torque Propogation}
-
         \subsubsection{Dynamics}
-            \paragraph*{The Jacobian}
-
-            \paragraph*{Gravity Compensation \& Coriolis Constants}
 
         \subsubsection{Basics of Gaits}
             \paragraph*{What is a gait}
@@ -161,8 +157,7 @@
             \end{figure}
 
         \subsubsection{Dynamic Walking}
-            % Fill with research from the grad paper
-            % Talk about CPG & paper from grad class
+        % Fill with research from the grad paper
 
     \subsection{Boston Dynamics Meeting} %% I don't like this name... we should think of another one
         During the course of the project we reached out to Boston Dynamics and arranges a conference call between our team and a group of their engineers from the spot team. We chose to reach out tho them as they are the current leader in the quadrupedal robotics field and would therefore have the most insight into the intricacies and problems that arise in the development of such a platform. We entered the meeting with a series of questions and subordinate related questions. This list comprised of:
@@ -195,5 +190,3 @@
         Following this we asked about the development of gaits and their choice of a trot gait in which the legs are moves in a FR, BL, BR, FL sequence instead of a more natural pace gait in which the legs are moved in a FR, BR, FL, BL sequence. Their response was different to what we had expected, in end Spot is able to perform a pace gait however it is less stable than the trot gait. The trot gait was the first successful gait the team was able to develop when working on the original spot project and therefore has had the most development put into it. Further gait development came with difficulties, the development of a bounding or galloping gait was severely hindered by the lack of an effective spine, without this the body would form an oscillating system making the robot unstable. However when mentioned the concept of a continuum spine which would result in the greatest mobility they greatly recommended against it, this was due to the uncertainty and inability to guarantee the position of the system for a given input. For all dynamic motions such as recovering from a push or jerk, they rely heavily on the IMU which in a ridged body robot they recommend placing it directly over the center of the robot however for a split body or one using a spine they recommended placing one on each segment in order to capture the motion of each independent system. 
         
         Leading from this to kinematics and trajectory planning allowed us to learn that they do use both a simulation and a real time physics engine as well as calculation all necessary jacobians at run time. This led us to asking details of their control feedback and they recommended getting a high level controller running at \~1 kHz for a smooth trajectory and a low level controller as fast as possible in order to have a stable PID loop and remove all gittering and jerkiness from the system. 
-    
-%%%%% this is the end
