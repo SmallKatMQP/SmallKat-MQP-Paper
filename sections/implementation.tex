@@ -7,13 +7,13 @@ The custom servo motors posed a very interesting challenge when it came to size 
        \centering
        \includegraphics[width=0.6\textwidth]{figures/MotorControllerBottom.png}
        \caption{Motor controller PCB bottom}
-       \label{fig:my_label}
+       \label{fig:MotortControllerPCBBottom}
    \end{figure}
    \begin{figure}[H]
        \centering
        \includegraphics[width=0.6\textwidth]{figures/MotorControllerTop.png}
        \caption{Motor controller PCB top}
-       \label{fig:my_label}
+       \label{fig:MotorControllerPCBTop}
    \end{figure}
 The boards were designed to be assembled directly into the motor connected directly by the motor pins, aligning the encoder above the magnet connected directly to the output shaft of the motor. The programming header was designed as a series of pads that can be used in combination with a pogo pin programming jig, meaning that the firmware can be updated quickly and easily. 
 \subsection{Motherboard}
@@ -22,7 +22,7 @@ The mother board was developed to be a stand alone micro controller using the ST
        \centering
        \includegraphics[width=0.6\textwidth]{figures/Motherboard.png}
        \caption{Motherboard}
-       \label{fig:my_label}
+       \label{fig:MotherboardPCB}
    \end{figure}
 To ensure reliability at higher clock speeds both a 32.768 kHz crystal oscillator and a 32MHz crystal oscillator were used. While developing the firmware for the motherboard the the clock speed was reduced from 400MHZ to 384 MHz in order to optimize the speed at which the SPI could be run as a clock divisible by 24MHz was requires to take full advantage of the SPI communication with the micro controllers on the motors. In order to have a reliable and stable 3.3v rail for the micro controller, 2 switch mode buck converter power supplies were used in order to stop regulate the 5v supply from USB and the 8.4v supply from the battery pack. This allows the board to be developed on and tested using only power from the USB connection and does not require the battery be connected. 
   
@@ -38,5 +38,5 @@ Many means of calculating the location of the pressure vector were considered ho
     \centering
     \includegraphics[width=0.8\textwidth]{figures/Triangulation.png}
     \caption{Pressure Vector Triangulation}
-    \label{fig:my_label}
+    \label{fig:PressureVectorTriangulation}
 \end{figure}

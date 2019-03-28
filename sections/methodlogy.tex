@@ -20,7 +20,7 @@ Based on our research we have decided to take make advancements in what is consi
             \hline
             \end{tabular}
         \caption{Table of DH parameters}
-        \label{tab:my_label}
+        \label{tab:DHTable}
     \end{table}
     
     \begin{figure}[H]
@@ -32,7 +32,7 @@ Based on our research we have decided to take make advancements in what is consi
     \end{gather*}
     
     \caption{Forward Positional Kinematics}
-    \label{fig:my_label}
+    \label{fig:FWKin_Robot}
     \end{figure}
     
     % \begin{figure}[H]
@@ -49,7 +49,7 @@ Based on our research we have decided to take make advancements in what is consi
     
 
     % \caption{Forward torque Kinematics}
-    % \label{fig:my_label}
+    % \label{fig:FW_TorqueKin}
     % \end{figure}
 
      \subsubsection{4 DoF vs 3DoF}
@@ -69,8 +69,8 @@ Based on our research we have decided to take make advancements in what is consi
     \subsubsection{Motors}
         Many motor solutions were considered when deciding for this project. These include the common hobby servo, specifically the Jx-Servo HV-5932MG due to its common voltage rating and its availability in a high torque metal geared variant, The Robotis Dynamixel Smart Servos, both the AX and XH series were considered. The Pros and Cons of each motor is listed below.  \vspace{0.1cm}
         \begin{table} [H]
-       \begin{tabular}{|p{3.5cm}|p{5.5cm}|p{5.5cm}|}
-        \hline
+        \begin{tabular}{|p{3.5cm}|p{5.5cm}|p{5.5cm}|}
+            \hline
            Motor  & Pros & Cons \\
            \hline
            \multirow{4}{*}{HV-5932MG}& Low Cost  & No Feedback\\
@@ -114,7 +114,7 @@ Based on our research we have decided to take make advancements in what is consi
         \centering
         \includegraphics[width=0.5\textwidth]{figures/Load_vs_SensorvsThickness.png}
         \caption{Correlation between load and pressure readings at different thicknesses of polyurethane\cite{chuah2012composite}}
-        \label{fig:my_label}
+        \label{fig:ThicknessVSPressure}
     \end{figure}
 
     The research done by the Contact Behavior of Soft Spherical Tactile Sensors\cite{youssefian2014contact} group demonstrated a similar method for calculating a pressure vector using magnets and hall effect sensors, despite the difference the math used to convert from readings to a pressure vector proved very useful to calculate out pressure vector using the 7 sensors on the foot of the robot. 
@@ -166,7 +166,7 @@ Based on our research we have decided to take make advancements in what is consi
     			\end{gather*}  
 			\end{minipage}
 			\caption{Calculations to determine number of clock cycles elapsed during SPI transmission}
-   			\label{fig:my_label}
+   			\label{fig:SPIClockCycles}
    		    \end{figure}
 
 			Using the same SPI channel and DMA, the total time to transfer all data to each of the legs would be \~ 1.6*10$^{-7}$s, this will allow the USB packet to be received, transmitted to the motors and the updated data returned to to the computer via an updated USB packet. \newline
@@ -214,7 +214,7 @@ Based on our research we have decided to take make advancements in what is consi
        \centering
        \includegraphics[width=0.6\textwidth]{figures/Leg_Flow_Dragram.png}
        \caption{Flow of data through a leg}
-       \label{fig:my_label}
+       \label{fig:DataFlow_Leg}
    \end{figure}
         \paragraph{Micro-controller to Computer}
         There were many fewer options for communicating between a computer and the master micro controller. The major solutions included Ethernet, USB HID and uart over USB. These options each have their advantages and disadvantages. Ethernet, this requires external supporting circuitry to interface between the micro controller and computer, this combined with the priority level of the networking stack on any Debian distribution of Linux including Ubuntu eliminated this option as a viable solution. Usart over USB was a viable option as the USB communication stack is marginally higher than the networking stack however usb to Usart is limited to \~2 Mbits/s. This meant that the throughput would not be enough for the robot to function reliably. USB HID communicates a 54 kbyte packet, reliably at 1ms. The HID USB stack is also the communication stack with the highest priority in any Debian based Linux system. therefore it is the least likely to lose a packet or have a data transmission error. 
@@ -231,7 +231,7 @@ The low level control software of the robot can be broken down into four distinc
     \hline
     \end{tabular}
     \caption{Data packet structure}
-    \label{fig:my_label}
+    \label{fig:DataPacketStructure}
 \end{figure}
 The data is then sent to the motors, foot sensors and any other devices connected in the chain. Due to the nature of the system the data must be sent in order of the last device first as shown below. 
 \begin{figure}[H]
@@ -242,7 +242,7 @@ The data is then sent to the motors, foot sensors and any other devices connecte
         \hline
     \end{tabular}
     \caption{Order of packets sent to a leg}
-    \label{fig:my_label}
+    \label{fig:PacketOrder}
 \end{figure}
 The path of data follows the structure below.
 
@@ -301,7 +301,7 @@ The path of data follows the structure below.
         \hline
     \end{tabular} 
     \caption{Order of Data returned from a leg}
-    \label{fig:my_label}
+    \label{fig:DataReturnOrder}
 \end{figure}
 
 \subsubsection{Motors}

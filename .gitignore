@@ -8,7 +8,11 @@
 *.gz
 *.code-workspace
 
-*.bib
+*.bbl
+*.bcf
+*.blg
 *.fdb_latexmk
 *.fls
 *.toc
+
+paper-blx.bib

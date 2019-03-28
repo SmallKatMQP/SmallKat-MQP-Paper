@@ -8,7 +8,7 @@
         \centering
         \includegraphics[width=120mm]{figures/V1andV2.jpg}
         \caption{SmallKat Versions 1, 2 and 2.1 during an undergraduate robotics lab demonstration}
-        \label{fig:my_label}
+        \label{fig:SmallKatVersions}
     \end{figure}
 \subsubsection{SmallKat V1 \& V2}
     \paragraph{Electrical}
@@ -32,14 +32,14 @@ SpotMini is a quadruped system designed and built by Boston Dynamics. It is a sm
         \centering
         \includegraphics[width=120mm]{figures/SpotMini.jpg}
         \caption{Boston Dynamics Spot Mini}
-        \label{fig:my_label}
+        \label{fig:SpotMini}
     \end{figure}
 SpotMini uses 4, 3 DOF legs to move itself around. It sports a 5kg, 5 DOF arm that it can use to pick things up and open doors. The sensor suite on board SpotMini and includes stereo cameras, depth cameras, an IMU, and position/force sensors in the limbs. These sensors help with navigation and mobile manipulation. SpotMini's dynamic control is unparalleled by any other quadruped system. The robot's movement is fluid and almost life like and it is able to navigate complex terrain and stairs. SpotMini can often be seen on YouTube were Boston Dynamics posts the robots new abilities and accomplishments. They plan on being able to commercial produce spot mini as a research platforms and for use in offices and homes.
 \begin{figure}[H]
         \centering
         \includegraphics[width=120mm]{figures/SpotMiniwithArm.jpg}
         \caption{Spot Mini with Arm}
-        \label{fig:my_label}
+        \label{fig:SpotMiniWithArm}
     \end{figure}
 
 \paragraph{MITs Cheetah}
@@ -56,7 +56,7 @@ SpotMini uses 4, 3 DOF legs to move itself around. It sports a 5kg, 5 DOF arm th
         \centering
         \includegraphics[width=0.8\textwidth]{3dof.PNG}
         \caption{Forward Kinematic equations for a 3 DOF system}
-        \label{fig:my_label}
+        \label{fig:FWKIN_3DOF}
     \end{figure}
     \paragraph{The Denavit-Hartenberg Convention}
     In mechanical engineering and robotics, DH parameters are the four parameters associated with a particular convention for attaching reference frames to the links of a spatial kinematic chain, or serial robot manipulator.
@@ -64,7 +64,7 @@ SpotMini uses 4, 3 DOF legs to move itself around. It sports a 5kg, 5 DOF arm th
         \centering
         \includegraphics[width=75mm]{Dh.PNG}
         \caption{Visual Representation of DH parameters}
-        \label{fig:my_label}
+        \label{fig:DHParams_Visual}
     \end{figure}
     Coordinate frames are attached to the joints between two links such that one transformation is associated with the joint, [Z], and the second is associated with the link [X]. The coordinate transformations along a serial robot consisting of n links form the kinematics equations of the robot. At its core D-H parameters are coordinate frames attached to the joints between two links such that one transformation is associated with the joint denoted as Z, and the other is associated with the link denoted as X. By multiplying these together you can describe a single link and its joint in a robot manipulator. The coordinate transformations along an entire serial robot consisting of n links form the kinematics equations of the robot.
     \begin{equation}
@@ -76,17 +76,17 @@ SpotMini uses 4, 3 DOF legs to move itself around. It sports a 5kg, 5 DOF arm th
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{xframe.PNG}
-        \caption{Rotation Matrix for X axis}
-        \label{fig:my_label}
+        \caption{Rotation Matrix for X axis}t
+        \label{fig:RotationMatrixXAxis}
     \end{figure}
-    where θi is the rotation around and di is the slide along the Z axis. Depending on how the robot is constructed either of the parameters θ or d can be constants. The dimensions of each link in the serial chain are defined by the screw displacement around the common normal Ai,i+1 from the joint Si to Si+1, which is given by
+    where $\theta$i is the rotation around and di is the slide along the Z axis. Depending on how the robot is constructed either of the parameters $\theta$ or d can be constants. The dimensions of each link in the serial chain are defined by the screw displacement around the common normal Ai,i+1 from the joint Si to Si+1, which is given by
     \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{zframe.PNG}
         \caption{Rotation Matrix for Z axis}
-        \label{fig:my_label}
+        \label{fig:RotationMatrixZAxis}
     \end{figure}
-    where αi,i+1 and ri,i+1 define the physical dimensions of the link in terms of the angle measured around and distance measured along the X axis. 
+    where $\alpha$i, i+1 and ri,i+1 define the physical dimensions of the link in terms of the angle measured around and distance measured along the X axis. 
     
     As a rule of thumb, the reference frames should follow the 3 rules below.
     \begin{enumerate}
@@ -112,7 +112,7 @@ SpotMini uses 4, 3 DOF legs to move itself around. It sports a 5kg, 5 DOF arm th
         \centering
         \includegraphics[width=150mm]{Transformation.PNG}
         \caption{Breakdown of transformation matrix}
-        \label{fig:my_label}
+        \label{fig:TransformationMatrixBreakdown}
     \end{figure}
     At this point we can introduce the actual D-H parameters They were briefly mentioned above when describing the screw displacements but are described below;
     \begin{itemize}
@@ -126,14 +126,14 @@ SpotMini uses 4, 3 DOF legs to move itself around. It sports a 5kg, 5 DOF arm th
         \centering
         \includegraphics[width=0.7\textwidth]{Matrizx.PNG}
         \caption{Transformation matrix}
-        \label{fig:my_label}
+        \label{fig:TransformationMatrix}
     \end{figure}
     By placing reference frames using the rules above and using this matrix, the forward kinematics of any serial manipulator can be easily determined where the x,y,z of the end effector is described as the 3x1 matrix $[T_x; T_y; T_z]$ in the result of the final matrix; 
      \begin{figure}[H]
         \centering
         \includegraphics[width=0.7\textwidth]{Matrix2.PNG}
         \caption{Resulting matrix}
-        \label{fig:my_label}
+        \label{fig:ResultingMatrix}
     \end{figure}
 
 
@@ -152,7 +152,7 @@ There are two general categories of gaits under which all others fall, these are
     \centering
     \includegraphics[width=0.7\textwidth]{figures/Gait_graphs_v2.png}
     \caption{Graphic showing motion in types of gaits}
-    \label{fig:my_label}
+    \label{fig:GaitMotion}
 \end{figure}
 
 \subsubsection{Dynamic Walking}
