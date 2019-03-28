@@ -207,7 +207,7 @@ Based on our research we have decided to take make advancements in what is consi
     \hline
     \end{tabular}
         \caption{Pros \& Cons of each communication protocol}
-        \label{tab:my_label}
+        \label{tab:ProsConsCommunicationProtocols}
     \end{table}
    After researching in depth into each of these protocols taking into development time, limitation of resources such as space on circuit boards and ease of communication between micro controllers chosen, SPI was the final choice. The micro controllers used in the servo, foot pressure sensor and IMU breakout boards communicate back to the master micro controller through a daisy chained SPI DMA protocol where the packet of data is sent to the first object in the chain, the reply from the previous cycle is passed on as a return packet to the next, and so on until the final packet reaches the final micro controller and returns the packet of results to the main micro controller. The flow of data for an example leg is shown in the figure below.
    \begin{figure}[H]
@@ -322,7 +322,7 @@ The path of data follows the structure below.
             \hline
             \end{tabular}
         \caption{Command values for servo}
-        \label{tab:my_label}
+        \label{tab:ServoCommandValues}
     \end{table}
 In between receiving packets the motors run multiple PID loops simultaneously to control position, torque and velocity at an ~161kHz refresh rate.
 \subsubsection{IMU}
@@ -340,7 +340,7 @@ The IMU micro controller continuously samples the BNO055, recording the current 
             \hline
             \end{tabular}
         \caption{Command values for IMU}
-        \label{tab:my_label}
+        \label{tab:IMUCommandValues}
     \end{table}
 
 \subsubsection{Foot Sensor}
@@ -356,7 +356,7 @@ Smurlarly to the IMU, the foot sensor micro controller continuously samples the 
             \hline
             \end{tabular}
         \caption{Command values for Foot sensor}
-        \label{tab:my_label}
+        \label{tab:FootSensorCommandValues}
     \end{table}
 
 \subsection{High Level Software: Robot Kernel}
