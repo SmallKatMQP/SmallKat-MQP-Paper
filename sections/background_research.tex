@@ -3,7 +3,7 @@
 \section{Background \& Research}
     \label{chap:background}
     \subsection{Small(Kat) Beginnings}
-        The SmallKat project started in October 2017 as an Independent Study Project (ISP) with Worcester Polytechnic Institute (WPI) Professor Ciaraldi. The original intention of the project was to create the smallest possible walking quadruped we could in a single term. Using a digital 9 gram servo and a custom circuit board as the back bone of the project we were able to create a 16 degree of freedom system that very much resembled a feline. The first version barely walked and while ultimately the results of this project were quite successful, it left us wanting a much better solution. During the summer of 2018 we continued the project creating a slightly larger more advanced system. This version dubbed SmallKat V2 was significantly more successful than its predecessor. It was more reliably designed and used much more reliable servo motors and several sensors including IMUs, pressure sensitive feet and current sensing. Additionally a reliable static walking gait was created and tested allowing it become WPI's most successful quadrupedal robotic system. Two versions of SmallKat V2 were built, aptly named Crimson and Gray they have been demoed at many of WPI's undergraduate robotics demonstrations. 
+        The SmallKat project started in October 2017 as an Independent Study Project (ISP) with Worcester Polytechnic Institute (WPI) Professor Ciaraldi. The original intention of the project was to create the smallest possible walking quadruped we could in a single term. Using a digital 9 gram servo and a custom circuit board as the back bone of the project we were able to create a 16 degree of freedom system that very much resembled a feline. The first version barely walked and while ultimately the results of this project were quite successful, it left us wanting a much better solution. During the summer of 2018 we continued the project creating a slightly larger more advanced system. This version dubbed SmallKat V2 was significantly more successful than its predecsesor. It was more reliably designed and used much more reliable servo motors and several sensors including IMUs, pressure sensitive feet and current sensing. Additionally a reliable static walking gait was created and tested allowing it become WPI's most successful quadrupedal robotic system. Two versions of SmallKat V2 were built, aptly named Crimson and Gray they have been demoed at many of WPI's undergraduate robotics demonstrations. 
         
         \begin{figure}[H]
             \centering
@@ -29,26 +29,34 @@
     \subsection{Other Quadrupedal Robots}
     Boston Dynamics is currently one of the leaders in quadrupedal and bipedal systems. Their robots are the source of much inspiration for people attempting to create quadruped systems. They have created a variety of quadrupeds each with different capabilities. However, the quadruped research space has been expanding quickly, and new players have arrived to the scene.
     \paragraph{Boston Dynamics’ Spot Mini}
-    SpotMini is a quadruped system designed and built by Boston Dynamics. It is a small agile system intended to be used in a variety of applications such as the home, office or outdoors. It stands at .83 meters tall and weighs 25kg. SpotMini is all-electric and can go for about 90 minutes on a single charge, depending on what it is doing.     
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=120mm]{figures/SpotMini.jpg}
-            \caption{Boston Dynamics Spot Mini}
-            \label{fig:SpotMini}
-        \end{figure}
-    SpotMini uses 4, 3 DOF legs to move itself around. It sports a 5kg, 5 DOF arm that it can use to pick things up and open doors. The sensor suite on board SpotMini and includes stereo cameras, depth cameras, an IMU, and position/force sensors in the limbs. These sensors help with navigation and mobile manipulation. SpotMini's dynamic control is unparalleled by any other quadruped system. The robot's movement is fluid and almost life like and it is able to navigate complex terrain and stairs. SpotMini can often be seen on YouTube were Boston Dynamics posts the robots new abilities and accomplishments. They plan on being able to commercial produce spot mini as a research platforms and for use in offices and homes.
+    SpotMini is a quadruped system designed and built by Boston Dynamics. It is a small agile system intended to be used in a variety of applications such as the home, office or outdoors. It stands at .83 meters tall and weighs 25kg. SpotMini is all-electric and can go for about 90 minutes on a single charge, depending on what it is doing.
     \begin{figure}[H]
-            \centering
-            \includegraphics[width=120mm]{figures/SpotMiniwithArm.jpg}
-            \caption{Spot Mini with Arm}
-            \label{fig:SpotMiniWithArm}
-        \end{figure}
+        \centering
+        \includegraphics[width=0.7\linewidth]{figures/SpotMiniwithArm.jpg}
+        \caption{Spot Mini with Arm}
+        \label{fig:SpotMiniWithArm}
+    \end{figure}
+    SpotMini uses 4, 3 DOF legs to move itself around. It sports a 5kg, 5 DOF arm that it can use to pick things up and open doors. The sensor suite on board SpotMini and includes stereo cameras, depth cameras, an IMU, and position/force sensors in the limbs. These sensors help with navigation and mobile manipulation. SpotMini's dynamic control is unparalleled by any other quadruped system. The robot's movement is fluid and almost life like and it is able to navigate complex terrain and stairs. SpotMini can often be seen on YouTube were Boston Dynamics posts the robots new abilities and accomplishments. They plan on being able to commercial produce spot mini as a research platforms and for use in offices and homes.
+    
+    \paragraph{MITs Cheetah 3}
+    One of the leaders of the quadruped world is Massachusetts Institute of Technology (MIT) Cheetah 3, the latest in MIT's Cheetah line. This quadrupedal walking system weighs just about 90lbs, and can run at a maximum of 13 feet per second. It has even demonstrated jumping onto platforms 30 inches tall and back-flipping!
+    However, MIT Cheetah's most impressive feat is their dynamic controller. It can walk up stairs and rough terrain without the use of perception sensors, like 3D cameras and/or LIDARS. This technology was developed to help the robots maneuver successfully even when sensor data may not be perfect. MIT hopes that its Cheetah may one day provide disaster relief to areas where human access is difficult or dangerous. % Add sources
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{figures/MITCheetah.jpeg}
+        \caption{MIT's Cheetah 3}
+        \label{fig:MITCheetah}
+    \end{figure}
 
-    \paragraph{MITs Cheetah}
+    \paragraph{Nybble} % https://www.indiegogo.com/projects/nybble-world-s-cutest-open-source-robotic-kitten#/
+    Nybble by Petoi is a very new player in the world of quadrupeds, announced in late 2018 on Indegogo. It is designed to be a low-cost Arduino powered robot for hobbyists. It is entirely made out of laser-cut wood pieces and 9 gram servo motors, and is powered by a custom board with an ATmega328P chip (from an Arduino Uno). Each leg has 2 degrees of freedom, forming a planar manipulator. This prevents Nybble from being able to turn effectively or to walk dynamically, absorbing rough terrain or external forces. Along with a 1 DoF tail, Nybble is only really suitable for hobbyists and low end research.\cite{nybble}
+    \begin{figure} [H]
+        \centering
+        \includegraphics[width=0.7\linewidth]{figures/Nybble.png}
+        \caption{Nybble's components}
+    \end{figure}
 
-    \paragraph{Nymble} % https://www.indiegogo.com/projects/nybble-world-s-cutest-open-source-robotic-kitten#/
-
-    \subsection{Key Concepts} %% Maybe change the name?
+    \subsection{Key Concepts} %% Maybe change the name?d
         \subsubsection{The Denavit-Hartenberg Convention}
             In mechanical engineering and robotics, DH parameters are the four parameters associated with a particular convention for attaching reference frames to the links of a spatial kinematic chain, or serial robot manipulator.
             \begin{figure}[H]
@@ -149,7 +157,7 @@
 
         \subsubsection{Basics of Gaits}
             \paragraph*{What is a gait}
-            Gait is the pattern of movement of the limbs of animals. Most animals use a variety of gaits, selecting gait based on speed, terrain, the need to maneuver, and energetic efficiency. \cite{wikipedia_2018_Gaits}.  
+            Gait is the pattern of movement of the limbs of animals. Most animals use a variety of gaits, selecting gait based on speed, terrain, the need to maneuver, and energetic efficiency. \cite{wikipedia_2018_Gaits} 
 
             \paragraph*{Types of gaits}
             There are two general categories of gaits under which all others fall, these are Symmetric and Asymmetric gaits. A symmetric gait is defined when the left and right limbs alternate. where as an asymmetric gait, the legs move in unison. Examples of these gaits can be seen below.  
