@@ -99,7 +99,7 @@
                 \caption{Rotation Matrix for X axis}
                 \label{fig:RotationMatrixXAxis}
             \end{figure}
-            where $\alpha$i, i+1 and ri,i+1 define the physical dimensions of the link in terms of the angle measured around and distance measured along the X axis. 
+            where $\alpha_{i, i+1}$ and $r_{i,i+1}$ define the physical dimensions of the link in terms of the angle measured around and distance measured along the X axis. 
             
             As a rule of thumb, the reference frames should follow the 3 rules below.
             \begin{enumerate}
@@ -120,36 +120,73 @@
             \begin{equation}
             ^{n-1}T_n=Trans_{z_{n-1}}(d_n)*Rot_{z_{n-1}}(\theta_n)*Trans_{x_n}(r_n)*Rot_{x_n}(\alpha_n)
             \end{equation}
-            Breaking each of these transformations into there matrix transformations we get;
-            \begin{figure}[H]
-                
-            \end{figure}
-            
-
+            Breaking each of these transformations into there matrix transformations we get:
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=150mm]{Transformation.PNG}
+                $$ Trans_{Z_{n-1}}(d_n) = \begin{bmatrix}
+                    1 & 0 & 0 & 0 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 1 & d_n \\
+                    0 & 0 & 0 & 1
+                \end{bmatrix} $$
+                $$ Rot_{Z_{n-1}}(\theta_n) = \begin{bmatrix}
+                    cos(\theta_n) & -sin(\theta_n) & 0 & 0 \\
+                    sin(\theta_n) & cos(\theta_n) & 0 & 0 \\
+                    0 & 0 & 1 & 0 \\
+                    0 & 0 & 0 & 1
+                \end{bmatrix}$$
+                $$ Trans_{X_n}(r_n) = \begin{bmatrix}
+                    1 & 0 & 0 & 0 \\
+                    0 & 1 & 0 & 0 \\
+                    0 & 0 & 1 & d_n \\
+                    0 & 0 & 0 & 1
+                \end{bmatrix} $$
+                $$ Rot_{X_{n}}(\alpha_n) = \begin{bmatrix}
+                    cos(\theta_n) & -sin(\theta_n) & 0 & 0 \\
+                    sin(\theta_n) & cos(\theta_n) & 0 & 0 \\
+                    0 & 0 & 1 & 0 \\
+                    0 & 0 & 0 & 1
+                \end{bmatrix}$$
+                $$ ^{n-1}T_n = \begin{bmatrix}
+                    cos(\theta_n) & -sin(\theta_n) cos(\alpha_n) & sin(\theta_n) sin(\alpha_n) & r_n cos(\theta_n) \\
+                    sin(\theta_n) & cos(\theta_n) cos(\alpha_n) & -cos(\theta_n) sin(\alpha_n) & r_n sin(\theta_n) \\
+                    0 & sin(\alpha_n) & cos(\alpha_n) & d_n  \\
+                    0 & 0 & 0 & 1
+                \end{bmatrix}
+                $$
                 \caption{Breakdown of transformation matrix}
                 \label{fig:TransformationMatrixBreakdown}
             \end{figure}
-            At this point we can introduce the actual D-H parameters They were briefly mentioned above when describing the screw displacements but are described below;
+
+            At this point we can introduce the actual DH parameters They were briefly mentioned above when describing the screw displacements but are described below;
             \begin{itemize}
                 \item d: offset along previous  z to the common normal
                 \item $\theta$: angle about previous z, from old x to new x
                 \item r or a: length of the common normal a.. Assuming a revolute joint, this is the radius about previous z.
                 \item $\alpha$ angle about common normal, from old z axis to new z axis
             \end{itemize}
-            Combining everything we have discussed, the screw displacement, transformation matrix and d-h parameters we get a matrix that looks like the following;
-            \begin{figure}[H]
+            Combining everything we have discussed, the screw displacement, transformation matrix and DH parameters we get a matrix that looks like the following:
+            \begin{figure}
                 \centering
-                \includegraphics[width=0.7\textwidth]{Matrizx.PNG}
-                \caption{Transformation matrix}
+                $$ T_{(i-1)i} = \begin{bmatrix}
+                    cos(\theta_i) & -sin(\theta_i) cos(\alpha_i) & sin(\theta_i) sin(\alpha_i) & r_n cos(\theta_i) \\
+                    sin(\theta_i) & cos(\theta_i) cos(\alpha_i) & -cos(\theta_i) sin(\alpha_) & r_n sin(\theta_i) \\
+                    0 & sin(\alpha_i) & cos(\alpha_i) & d_i  \\
+                    0 & 0 & 0 & 1
+                \end{bmatrix} $$
+                \caption{Transformation Matrix via DH Parameters}
                 \label{fig:TransformationMatrix}
             \end{figure}
             By placing reference frames using the rules above and using this matrix, the forward kinematics of any serial manipulator can be easily determined where the x,y,z of the end effector is described as the 3x1 matrix $[T_x; T_y; T_z]$ in the result of the final matrix; 
+            
             \begin{figure}[H]
                 \centering
-                \includegraphics[width=0.7\textwidth]{Matrix2.PNG}
+                $$ M_{n-1, n} = \begin{bmatrix}
+                    R_{xx} & R_{xy} & R_{xz} & T_x \\
+                    R_{yx} & R_{yy} & R_{yz} & T_y \\
+                    R_{zx} & R_{zy} & R_{zz} & T_z \\
+                    0 & 0 & 0 & 1
+                \end{bmatrix}$$
                 \caption{Resulting matrix}
                 \label{fig:ResultingMatrix}
             \end{figure}
@@ -164,8 +201,23 @@
                 \label{fig:FWKIN_3DOF}
             \end{figure}
             \paragraph*{Inverse Kinematics}
+            Inverse Kinematics is, as the name makes it out to be, the inverse of forward kinematics. Therefore, the equations obtained tell us position in joint space when given a position in task space. In some cases, a redundant link is used, such as in a 3-DoF planar manipulator. To solve for this case, another measurement in task space should be used. Generally, there are 4 main ways to solve for Inverse Kinematic Equations: the Algebraic method, the Geometric method, the Jacobian method \& the Heuristic method.
+            \subparagraph*{Algebraic Method}
+                The algebraic method is conceptually the simplest of the 4 methods, but also causes the most amount of problems. To use this method, just find the algebraic inverse of the Forward Kinematic equations. This is relatively simple to compute in small applications with few degrees of freedom. However, when the manipulator becomes more complicated, it often fails to produce usable equations. Therefore, this method is useful for hand-computing 2-DoF manipulators.
+            \subparagraph*{Geometric Method}
+                The geometric method is another useful way to calculate slightly more complex inverse kinematic systems. Using geometric concepts, the Inverse Kinematic equations can be calculated, starting from the position in task space to find the angles of each joint (ie the position in joint space). Some of these geometric concepts will include the Law of Cosines, the Law of Sines, and the Pythagorean theorem. This method is usually used for more complex 3 dimensional situations, usually with 4-DoF or fewer.
+            \subparagraph*{Jacobian Method}
+                The Jacobian method of calculating Inverse Kinematic equations is a rather simple, yet effective concept. It's backbone is based off of the linear algebra concept of changing rank: $\mathbb{R}^n \rightarrow \mathbb{R}^3$ where $n$ is the number of degrees of freedom of the manipulator. Given that $p_0 = p(x_0)$ as the initial position and $p_1 = p(x_0 + \Delta x)$ is the final position, the Jacobain method iteratively computes an estimated $\Delta x$ and minimizes the error given by $p(x_0 + \delta x_{estimate}) - p_1$. For small $\Delta x$ vectors, the following equation derrived via series expansion from the position function gives: $p(x_1) \approx p(x_0) + J_p (x_0)\Delta x$, where $J_p$ is the Jacobian matrix (see more in Section \ref{subsec:jacobians}). Taking the Moore-Penrose pseudoinverse \cite{wikipedia_pseudoinverse} of the Jacobian and rearranging the equation results in: $\Delta x \approx J_p^+(x_0)\Delta p$, where $/Delta p = p(x_0 + \Delta x) - p(x_0)$. This will give a very rough estimate of the desired $\Delta x$ vector. To get a more accurate value, a line search can be used. The final recursive function is given in figure \ref{fig:ikin_jacobian}. \cite{wikipedia_ikin}
+                \begin{figure}
+                    \centering
+                    $$\Delta x_{k+1} = J_p^+ (x_k)\Delta p_k 
+                    $$
+                    \caption{Jacobian Method Equation}
+                    \label{fig:ikin_jacobian}
+                \end{figure}
+            \subparagraph*{Heuristic Method}
 
-        \subsubsection{Jacobians}
+        \subsubsection{Jacobians} \label{subsec:jacobians}
 
         \subsubsection{Torque Propogation}
 
