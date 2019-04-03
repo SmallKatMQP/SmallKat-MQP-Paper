@@ -237,8 +237,18 @@
             \end{figure}
 
         \subsubsection{Dynamic Walking}
-            % Fill with research from the grad paper
-            % Talk about CPG & paper from grad class
+            When it comes to designing dynamic walking gaits, researchers have looked toward the natural world for inspiration. Dynamic walking has been the focus of researchers everywhere, from the professors and students at MIT who worked on Cheetah 3 \cite{MIT_Cheetah3_Paper} to the engineers of Spot Mini. \cite{} A popular method to dynamic walking is based on a Central Pattern Generator (CPG) and a mix of predefined responses and reflexes. This is similar to nature, where animals (both bipedal and quadrupedal) use a pattern generator which is overrun by reflexes when balance is lost.
+            \subparagraph*{Central Pattern Generator (CPG)}
+
+            \subparagraph*{Wide Stability Margin (WSM)}
+
+            \paragraph{Basic Requirements for Dynamic Walking}
+
+            \paragraph{Central Pattern Generator (CPG)}
+
+            \paragraph{Wide Stability Margin (WSM)}
+                
+            \paragraph{Responses vs Reflexes}
 
     \subsection{Boston Dynamics Meeting} %% I don't like this name... we should think of another one
         During the course of the project we reached out to Boston Dynamics and arranges a conference call between our team and a group of their engineers from the spot team. We chose to reach out tho them as they are the current leader in the quadrupedal robotics field and would therefore have the most insight into the intricacies and problems that arise in the development of such a platform. We entered the meeting with a series of questions and subordinate related questions. This list comprised of:
@@ -270,6 +280,6 @@
 
         Following this we asked about the development of gaits and their choice of a trot gait in which the legs are moves in a FR, BL, BR, FL sequence instead of a more natural pace gait in which the legs are moved in a FR, BR, FL, BL sequence. Their response was different to what we had expected, in end Spot is able to perform a pace gait however it is less stable than the trot gait. The trot gait was the first successful gait the team was able to develop when working on the original spot project and therefore has had the most development put into it. Further gait development came with difficulties, the development of a bounding or galloping gait was severely hindered by the lack of an effective spine, without this the body would form an oscillating system making the robot unstable. However when mentioned the concept of a continuum spine which would result in the greatest mobility they greatly recommended against it, this was due to the uncertainty and inability to guarantee the position of the system for a given input. For all dynamic motions such as recovering from a push or jerk, they rely heavily on the IMU which in a ridged body robot they recommend placing it directly over the center of the robot however for a split body or one using a spine they recommended placing one on each segment in order to capture the motion of each independent system. 
         
-        Leading from this to kinematics and trajectory planning allowed us to learn that they do use both a simulation and a real time physics engine as well as calculation all necessary jacobians at run time. This led us to asking details of their control feedback and they recommended getting a high level controller running at \~1 kHz for a smooth trajectory and a low level controller as fast as possible in order to have a stable PID loop and remove all gittering and jerkiness from the system. 
+        Leading from this to kinematics and trajectory planning allowed us to learn that they do use both a simulation and a real time physics engine as well as calculation all necessary jacobians at run time. This led us to asking details of their control feedback and they recommended getting a high level controller running at \~1 kHz for a smooth trajectory and a low level controller as fast as possible in order to have a stable PID loop and remove all jittering and jerkiness from the system. 
     
 %%%%% this is the end

@@ -185,6 +185,19 @@
 	abstract = "Inverse Kinematics is defined as the problem of determining a set of appropriate joint configurations for which the end effectors move to desired positions as smoothly, rapidly, and as accurately as possible. However, many of the currently available methods suffer from high computational cost and production of unrealistic poses. In this paper, a novel heuristic method, called Forward And Backward Reaching Inverse Kinematics (FABRIK), is described and compared with some of the most popular existing methods regarding reliability, computational cost and conversion criteria. FABRIK avoids the use of rotational angles or matrices, and instead finds each joint position via locating a point on a line. Thus, it converges in few iterations, has low computational cost and produces visually realistic poses. Constraints can easily be incorporated within FABRIK and multiple chains with multiple end effectors are also supported."
 }
 
+@article{AdaptiveDynamicWalking,
+	author = {Yasuhiro Fukuoka and Hiroshi Kimura and Avis H. Cohen},
+	title ={Adaptive Dynamic Walking of a Quadruped Robot on Irregular Terrain Based on Biological Concepts},
+	journal = {The International Journal of Robotics Research},
+	volume = {22},
+	number = {3-4},
+	pages = {187-202},
+	year = {2003},
+	doi = {10.1177/0278364903022003004},
+	URL = {https://doi.org/10.1177/0278364903022003004},
+		abstract = { We have been trying to induce a quadruped robot to walk with medium walking speed on irregular terrain based on biological concepts. We propose the necessary conditions for stable dynamic walking on irregular terrain in general, and we design the mechanical system and the neural system by comparing biological concepts with those necessary conditions described in physical terms. A PD controller at the joints can construct the virtual spring-damper system as the visco-elasticity model of a muscle. The neural system model consists of a central pattern generator (CPG) and reflexes. A CPG receives sensory input and changes the period of its own active phase. The desired angle and P-gain of each joint in the virtual spring-damper system is switched based on the phase signal of the CPG. CPGs, the motion of the virtual spring-damper system of each leg and the rolling motion of the body are mutually entrained through the rolling motion feedback to CPGs, and can generate adaptive walking. We report on our experimental results of dynamic walking on terrains of medium degrees of irregularity in order to verify the effectiveness of the designed neuro-mechanical system. We point out the trade-off problem between the stability and the energy consumption in determining the cyclic period of walking on irregular terrain, and we show one example to solve this problem. MPEG footage of these experiments can be seen at http://www.kimura.is.uec.ac.jp. }
+}
+
 % Other MQPs
 @misc{RoboDog_MQP,
 	title={RoboDog: A Low-Cost Electrically Actuated Quadruped},
