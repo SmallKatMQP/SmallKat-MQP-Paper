@@ -207,7 +207,7 @@
             \subparagraph*{Geometric Method}
                 The geometric method is another useful way to calculate slightly more complex inverse kinematic systems. Using geometric concepts, the Inverse Kinematic equations can be calculated, starting from the position in task space to find the angles of each joint (ie the position in joint space). Some of these geometric concepts will include the Law of Cosines, the Law of Sines, and the Pythagorean theorem. This method is usually used for more complex 3 dimensional situations, usually with 4-DoF or fewer.
             \subparagraph*{Jacobian Method}
-                The Jacobian method of calculating Inverse Kinematic equations is a rather simple, yet effective concept. It's backbone is based off of the linear algebra concept of changing rank: $\mathbb{R}^n \rightarrow \mathbb{R}^3$ where $n$ is the number of degrees of freedom of the manipulator. Given that $p_0 = p(x_0)$ as the initial position and $p_1 = p(x_0 + \Delta x)$ is the final position, the Jacobain method iteratively computes an estimated $\Delta x$ and minimizes the error given by $p(x_0 + \delta x_{estimate}) - p_1$. For small $\Delta x$ vectors, the following equation derrived via series expansion from the position function gives: $p(x_1) \approx p(x_0) + J_p (x_0)\Delta x$, where $J_p$ is the Jacobian matrix (see more in Section \ref{subsec:jacobians}). Taking the Moore-Penrose pseudoinverse \cite{wikipedia_pseudoinverse} of the Jacobian and rearranging the equation results in: $\Delta x \approx J_p^+(x_0)\Delta p$, where $/Delta p = p(x_0 + \Delta x) - p(x_0)$. This will give a very rough estimate of the desired $\Delta x$ vector. To get a more accurate value, a line search can be used. The final recursive function is given in figure \ref{fig:ikin_jacobian}. \cite{wikipedia_ikin}
+                The Jacobian method of approximating Inverse Kinematic equations is a rather simple, yet effective concept. It's backbone is based off of the linear algebra concept of changing rank: $\mathbb{R}^n \rightarrow \mathbb{R}^3$ where $n$ is the number of degrees of freedom of the manipulator. Given that $p_0 = p(x_0)$ as the initial position and $p_1 = p(x_0 + \Delta x)$ is the final position, the Jacobain method iteratively computes an estimated $\Delta x$ and minimizes the error given by $p(x_0 + \delta x_{estimate}) - p_1$. For small $\Delta x$ vectors, the following equation derrived via series expansion from the position function gives: $p(x_1) \approx p(x_0) + J_p (x_0)\Delta x$, where $J_p$ is the Jacobian matrix (see more in Section \ref{subsec:jacobians}). Taking the Moore-Penrose pseudoinverse \cite{wikipedia_pseudoinverse} of the Jacobian and rearranging the equation results in: $\Delta x \approx J_p^+(x_0)\Delta p$, where $/Delta p = p(x_0 + \Delta x) - p(x_0)$. This will give a very rough estimate of the desired $\Delta x$ vector. To get a more accurate value, a line search can be used. The final recursive function is given in Figure \ref{fig:ikin_jacobian}. \cite{wikipedia_ikin}
                 \begin{figure}
                     \centering
                     $$\Delta x_{k+1} = J_p^+ (x_k)\Delta p_k 
@@ -216,13 +216,10 @@
                     \label{fig:ikin_jacobian}
                 \end{figure}
             \subparagraph*{Heuristic Method}
-
-        \subsubsection{Jacobians} \label{subsec:jacobians}
-
-        \subsubsection{Torque Propogation}
-
+                Another approximation method for calculating Inverse Kinematics is the Heuristic Method. The most popular heuristic algorithms include the Cyclic Coordinate Descent (CCD) \cite{ikin_CCD} and the Forward And Backward Reaching Inverse Kinematics (FABRIK). \cite{ikin_FABRIK}
+                
         \subsubsection{Dynamics}
-            \paragraph*{The Jacobian}
+            \paragraph*{The Jacobian} \label{subsec:jacobians}
 
             \paragraph*{Gravity Compensation \& Coriolis Constants}
 
