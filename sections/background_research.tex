@@ -239,16 +239,24 @@
         \subsubsection{Dynamic Walking}
             When it comes to designing dynamic walking gaits, researchers have looked toward the natural world for inspiration. Dynamic walking has been the focus of researchers everywhere, from the professors and students at MIT who worked on Cheetah 3 \cite{MIT_Cheetah3_Paper} to the engineers of Spot Mini. \cite{} A popular method to dynamic walking is based on a Central Pattern Generator (CPG) and a mix of predefined responses and reflexes. This is similar to nature, where animals (both bipedal and quadrupedal) use a pattern generator which is overrun by reflexes when balance is lost.
             \subparagraph*{Central Pattern Generator (CPG)}
+                Central Pattern Generators (CPG) is a control method that generates trajectories based on loosel-coupled oscillators, similarly found to many neural circuits in animals. Essentially, CPGs are a biological neural network that produces rhythmic output patterns without sensor input given a signal to start.\cite{CPG_StateOfTheArt} It is what makes breathing, swallowing, chewing, and even walking work in humans and other animals. The same concept can be used in robotics to provide a trajectory for basic trotting gaits, and can be very stable against uncertainties in environemnts, like an obstacle in the way. There are two different models that can be used: biological neural networks and coupled oscillator networks.
+               
+                Biological neural networks use a control system similar to our neural networks in our bodies. An example of a model is the Rulkov map type neuron. This model produces a constant oscillating wave given some input parameters by using two neurons that can oscillate when connected together. Although this method is very efficient, it exhibits spiking dynamics similar to that in galangia, \cite{SpikingNeuralBehavior} as shown in Figure \ref{fig:CPGSpiking} 
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{figures/CPG_NeuralSpiking.png}
+                    \caption{Wave forms generated using Rulkov Map type neurons, which display the spiking-bursting behavior \cite{SpikingNeuralBehavior}}
+                    \label{fig:CPGSpiking}
+                \end{figure}
 
+                Another method is to use a mathematical model, such as the Kuramoto oscillators or harmonic oscillators. Such models simplify the system as a whole and make outcomes more predictable, but different from natural CPGs. However, it is still very possible to replicate much of what biological neural networks can make. 
+
+                Although CPGs by definition are open loop, ie they do not need sensory feedback, it can be incorporated to modify the parameters of the CPG.\cite{CPG_StateOfTheArt} For example, a snake robot might need to change its oscillating behavior depending on the medium it is traveling on. This can be inputed into a properly designed CPG to allow for easier transition between gaits.
             \subparagraph*{Wide Stability Margin (WSM)}
 
             \paragraph{Basic Requirements for Dynamic Walking}
-
-            \paragraph{Central Pattern Generator (CPG)}
-
-            \paragraph{Wide Stability Margin (WSM)}
                 
-            \paragraph{Responses vs Reflexes}
+            \paragraph{Responses and Reflexes}
 
     \subsection{Boston Dynamics Meeting} %% I don't like this name... we should think of another one
         During the course of the project we reached out to Boston Dynamics and arranges a conference call between our team and a group of their engineers from the spot team. We chose to reach out tho them as they are the current leader in the quadrupedal robotics field and would therefore have the most insight into the intricacies and problems that arise in the development of such a platform. We entered the meeting with a series of questions and subordinate related questions. This list comprised of:
