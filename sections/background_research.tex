@@ -218,10 +218,10 @@
             \subparagraph*{Heuristic Method}
                 Another approximation method for calculating Inverse Kinematics is the Heuristic Method. The most popular heuristic algorithms include the Cyclic Coordinate Descent (CCD) \cite{ikin_CCD} and the Forward And Backward Reaching Inverse Kinematics (FABRIK). \cite{ikin_FABRIK}
                 
-        \subsubsection{Dynamics}
-            \paragraph*{The Jacobian} \label{subsec:jacobians}
+        % \subsubsection{Dynamics}
+        %     \paragraph*{The Jacobian} \label{subsec:jacobians}
 
-            \paragraph*{Gravity Compensation \& Coriolis Constants}
+        %     \paragraph*{Gravity Compensation \& Coriolis Constants}
 
         \subsubsection{Basics of Gaits}
             \paragraph*{What is a gait}
@@ -237,9 +237,9 @@
             \end{figure}
 
         \subsubsection{Dynamic Walking}
-            When it comes to designing dynamic walking gaits, researchers have looked toward the natural world for inspiration. Dynamic walking has been the focus of researchers everywhere, from the professors and students at MIT who worked on Cheetah 3 \cite{MIT_Cheetah3_Paper} to the engineers of Spot Mini. \cite{} A popular method to dynamic walking is based on a Central Pattern Generator (CPG) and a mix of predefined responses and reflexes. This is similar to nature, where animals (both bipedal and quadrupedal) use a pattern generator which is overrun by reflexes when balance is lost.
+            When it comes to designing dynamic walking gaits, researchers have looked toward the natural world for inspiration. Dynamic walking has been the focus of researchers everywhere, from the professors and students at MIT who worked on Cheetah 3 \cite{MIT_Cheetah3_Paper} to the engineers of Spot Mini. \cite{SpotMiniBostonDynamics} A popular method to dynamic walking is based on a Central Pattern Generator (CPG) and a mix of predefined responses and reflexes. This is similar to nature, where animals (both bipedal and quadrupedal) use a pattern generator which is overrun by reflexes when balance is lost.
             \subparagraph*{Central Pattern Generator (CPG)}
-                Central Pattern Generators (CPG) is a control method that generates trajectories based on loosel-coupled oscillators, similarly found to many neural circuits in animals. Essentially, CPGs are a biological neural network that produces rhythmic output patterns without sensor input given a signal to start.\cite{CPG_StateOfTheArt} It is what makes breathing, swallowing, chewing, and even walking work in humans and other animals. The same concept can be used in robotics to provide a trajectory for basic trotting gaits, and can be very stable against uncertainties in environemnts, like an obstacle in the way. There are two different models that can be used: biological neural networks and coupled oscillator networks.
+                Central Pattern Generators (CPG) is a control method that generates trajectories based on loosed-coupled oscillators, similarly found to many neural circuits in animals. Essentially, CPGs are a biological neural network that produces rhythmic output patterns without sensor input given a signal to start.\cite{CPG_StateOfTheArt} It is what makes breathing, swallowing, chewing, and even walking work in humans and other animals. The same concept can be used in robotics to provide a trajectory for basic trotting gaits, and can be very stable against uncertainties in environments, like an obstacle in the way. There are two different models that can be used: biological neural networks and coupled oscillator networks.
                
                 Biological neural networks use a control system similar to our neural networks in our bodies. An example of a model is the Rulkov map type neuron. This model produces a constant oscillating wave given some input parameters by using two neurons that can oscillate when connected together. Although this method is very efficient, it exhibits spiking dynamics similar to that in galangia, \cite{SpikingNeuralBehavior} as shown in Figure \ref{fig:CPGSpiking} 
                 \begin{figure}[H]
@@ -251,14 +251,35 @@
 
                 Another method is to use a mathematical model, such as the Kuramoto oscillators or harmonic oscillators. Such models simplify the system as a whole and make outcomes more predictable, but different from natural CPGs. However, it is still very possible to replicate much of what biological neural networks can make. 
 
-                Although CPGs by definition are open loop, ie they do not need sensory feedback, it can be incorporated to modify the parameters of the CPG.\cite{CPG_StateOfTheArt} For example, a snake robot might need to change its oscillating behavior depending on the medium it is traveling on. This can be inputed into a properly designed CPG to allow for easier transition between gaits.
+                Although CPGs by definition are open loop, ie they do not need sensory feedback, it can be incorporated to modify the parameters of the CPG.\cite{CPG_StateOfTheArt} For example, a snake robot might need to change its oscillating behavior depending on the medium it is traveling on. This can be inputted into a properly designed CPG to allow for easier transition between gaits.
             \subparagraph*{Wide Stability Margin (WSM)}
-
+                One of the best ways to measure the stability of a robot is to use the Wide Stability Margin method. The WSM method uses a key concept in physics: balance is based on whether the center of gravity is outside the points of contact. The procedure is very simple: project the points of contact on the ground (feet in the case of a quadruped), along with the center of gravity, and see if the center of gravity is outside the polygon drawn by the projected points of contact, as seen by the example in Figure \ref{fig:wsm_example}.\cite{AdaptiveDynamicWalking} The WSM factor can be determined by measuring the shortest distance between the projected center of gravity and the polygon made by the projected points of contact. 
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{figures/WideStabilityMargin.png}
+                    \caption{Example of Wide Stability Margin on a quadruped robot \cite{AdaptiveDynamicWalking}}
+                    \label{fig:wsm_example}
+                \end{figure}
             \paragraph{Basic Requirements for Dynamic Walking}
-                
+                In order for a robot to be able to dynamically walk, it has to follow a few criteria: \cite{AdaptiveDynamicWalking}
+                \begin{Deliverables}
+                    \item The robot should have the ability to move the leg forward/backward and sideways.
+                    \item The gait used should have a short period in order to maximize the WSM.
+                    \item The swinging leg should be able to move forward during the swinging phase of the gait.
+                    \item The leg should have a high coefficient of friction with the ground (no slipping)
+                    \item Angular movement should be minimized while the legs are moving during a gait
+                    \item The movement between the body and legs should be kept separately regardless of irregular terrain
+                \end{Deliverables}
             \paragraph{Responses and Reflexes}
+                Using a natural model requires that the robot also has reflexes and responses. Reflexes are predefined movements that are used in emergency, for example when a robot is falling over. Responses, however, are adjustments in the gait to reflect changes in the environment, like when a robot is walking on tilted terrain. Both reflexes and responses are necessary adjustments when developing a walking gait using nature as a model. Usually, software will contain pre-populated conditions and responses/reflexes for those conditions in order to minimize the response time of an event.
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{figures/Tekken2ReflexResponses.png}
+                    \caption{Example of predefined reflex and response table from Tekken 2 \cite{AdaptiveDynamicWalking}}
+                    \label{fig:reflexresponsetable}
+                \end{figure}
 
-    \subsection{Boston Dynamics Meeting} %% I don't like this name... we should think of another one
+    \subsection{Interviewing Boston Dynamics}
         During the course of the project we reached out to Boston Dynamics and arranges a conference call between our team and a group of their engineers from the spot team. We chose to reach out tho them as they are the current leader in the quadrupedal robotics field and would therefore have the most insight into the intricacies and problems that arise in the development of such a platform. We entered the meeting with a series of questions and subordinate related questions. This list comprised of:
         \begin{itemize}
             \item Why was the decision mate to pursue 3DOF legs instead of 4DOF as most quadrupedal animals have. 
@@ -270,7 +291,7 @@
             \item How are your trajectories and kinematics calculated pragmatically
                 \begin{itemize}
                     \item Is a real time physics engine used
-                    \item Are jacobians calculated at run time
+                    \item Are Jacobians calculated at run time
                 \end{itemize}
             \item What kind of sensors are used on Spot mini
                 \begin{itemize}
