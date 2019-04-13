@@ -6,7 +6,7 @@
 
         \subsubsection{Design Requirements}
             \begin{Deliverables}
-                \item Size simular to a domestic cat
+                \item Lab-appropriate size
                 \item Additive Manufacturing method with polyactic acid (PLA)
                 \item Modular \& Adaptable to change
                 \item High coefficient of friction with the ground
@@ -16,17 +16,31 @@
                 \item Good looking design
             \end{Deliverables}
         \subsubsection{General Design}
-            At the start of the project,
-            
-            \paragraph{Sizing SmallKat}
+            The mechanical design of SmallKat was very important, since users will be adapting it to their need, whether that is adding a robot arm or implementing a camera in the head. Therefore, we wanted to design our system to be adaptable and modular.
 
-            \paragraph{Leg Design}
+            \paragraph{Sizing SmallKat}
+                When deciding the size of SmallKat, we looked into the options currently provided on the market, as well as previous versions (talked about in Section \ref{subsec:SmallKatVersions}). Larger robots like Boston Dynamics' BigDog and Spot Mini robots were rather large, and would increase the cost of the robot as a whole. When looking at SmallKat V2, we appreciated its "desktop" size, but realized it's small form factor also limited us in our goals. Since deciding on an exact size was difficult, we decided to size our robot based on a standard servo. This would allow users to swap motors with others that better suit their needs without having to redesign the whole robot. In the end, our robot ended up being slightly larger than a standard house cat. While the robot is still small and relatively nimble, it also has the capability to have advanced sensors, like a 3D RealSense camera, and to traverse paths that the smaller SmallKats couldn't, like stairs.
+
+            \paragraph{Leg Design: 4-DoF vs 3-DoF}
+                The leg design was the most important of decisions when designing SmallKat mechanically. The first decision was to decide how many degrees of freedom our system would have. More degrees would allow for more flexibility and give users more options for gait designs. However, too many degrees of freedom per leg would not only complicate control algorithms, but also increase weight per leg, which would in turn increase rotational and linear inertia, add more strain to the motors, and decrease dynamic gait performance. It is important to note that SmallKat needed at least 3 degrees of freedom to allow for forward and sideways movement, necessary for dynamic walking. Therefore, the decision was between 3 and 4 DoFs.
+
+                Early on in our design process, we spoke to Boston Dynamics (as talked about in Section \ref{subsec:BostonDynamicsInterview}), and one of the questions we asked was their opinion on 3-DoF vs 4-DoF legs. In their research, they saw the design simplicity to be the major benefit of 3-DoF legs, so almost all of their quadrupeds were 3 degrees of freedom; a simpler design means less can go wrong for their customers. However, the engineers did admit they didn't look into different 4-DoF leg designs.
+
+                \begin{figure}
+                    \centering
+                    MAKE SURE WE INCLUDE A PICTURE
+                    \caption{Planar 4-DoF Leg Design}
+                    \label{fig:Planar4DoF}
+                \end{figure}
+
+                After testing the motors, we ultimately decided to take a different approach to a 4-DoF leg: a 3-DoF planar manipulator with a rotation axis in the hip, as depicted in Figure \ref{fig:Planar4DoF}. This would give the platform the capability to change the angle of contact with the ground, potentially improving performance on irregular terrain. This novel leg design, we call a planar 4-DoF Leg, is different from any other quadruped we found in our research. Our initial concern of not having enough speed and power in the motors we selected were taken care of after some testing (see Section \ref{subsubsec:MotorSelection}). However, the main reason we chose 4-DoF legs instead of the 3-DoF variant was the adaptability it gave the users of our platform.
 
             \paragraph{Tail Design}
-
+                
             \paragraph{Head Design}
+                Design decisions for the head were based on two different factors: look and ability to mount sensors. The look itself was taken from previous versions of SmallKats, since it is the 
 
-        \subsubsection{Motor Selection}
+        \subsubsection{Motor Selection} \label{subsubsec:MotorSelection}
 
     \subsection{Electronics}
 
@@ -45,7 +59,7 @@
             \centering
             \begin{tabular}{|c|c|c|c|c|}
             \hline
-                Link & r & $\alpha$ & d & $\theta$ \\
+                Link & d & $\theta$ & r & $\alpha$\\
                 \hline
                 1 & 0 & $\theta_1$ & 0 & 90 \\
                 2 & 0 &$\theta_2$ & $l_1$ & 0  \\
