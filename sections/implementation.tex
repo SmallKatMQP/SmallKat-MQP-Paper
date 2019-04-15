@@ -17,10 +17,10 @@ The custom servo motors posed a very interesting challenge when it came to size 
    \end{figure}
 The boards were designed to be assembled directly into the motor connected directly by the motor pins, aligning the encoder above the magnet connected directly to the output shaft of the motor. The programming header was designed as a series of pads that can be used in combination with a pogo pin programming jig, meaning that the firmware can be updated quickly and easily. 
 \subsection{Motherboard}
-The mother board was developed to be a stand alone micro controller using the STM32H743iit6 micro controller running at 400 MHz. Broken out from this micro controller were all 6 SPI channels, 12 GPIO pins, UART, USB HS and a programming header. In order to limit the number of traces interfering with the High power  coming from the battery, 3.3v and the Ground Plane a 4 layer board was chosen despite the increased cost of production. This meant that all the signal traces could be run internally allowing for a continuous trace running around the periphery of the board connecting all of the connectors to the 8.4v supply coming in from the battery.
+The mother board was developed to be a stand alone micro controller using the STM32H743vit6 micro controller running at 400 MHz. Broken out from this micro controller were all 6 SPI channels, 12 GPIO pins, UART, USB HS and a programming header. In order to limit the number of traces interfering with the High power  coming from the battery, 3.3v and the Ground Plane a 4 layer board was chosen despite the increased cost of production. This meant that all the signal traces could be run internally allowing for a continuous trace running around the periphery of the board connecting all of the connectors to the 8.4v supply coming in from the battery.
 \begin{figure}[H]
        \centering
-       \includegraphics[width=0.6\textwidth]{figures/Motherboard.png}
+       \includegraphics[width=0.6\textwidth]{figures/Motherboard_Rev2.png}
        \caption{Motherboard}
        \label{fig:MotherboardPCB}
    \end{figure}
@@ -30,7 +30,12 @@ To ensure reliability at higher clock speeds both a 32.768 kHz crystal oscillato
 \subsection{IMU}
 
 \subsection{Foot Sensors}
-
+\begin{figure}[H]
+       \centering
+       \includegraphics[width=0.6\textwidth]{figures/FootSensor.png}
+       \caption{Foot Sensor}
+       \label{fig:FootSensorPCB}
+   \end{figure}
 \subsubsection{Board Design}
 \subsubsection{Vector Triangulation}
 Many means of calculating the location of the pressure vector were considered however many of them were unreliable and/or difficult to implement on a micro controller using C/C++. This led us to developing a triangulation algorithm similar to that used by police to triangulate a cell phone based on near by cell towers. The pressure of the sensors in a quadrant(one sector of the total sensor) is read and the equations of 3 circles with pressure dependent radius are calculated, the higher the pressure read the smaller the radius of the circle. The intersection points of the circles are then calculated and the equations of 3 lines are found and the intersection point of all three of those is found. This gives the center point of the pressure centroids. 
@@ -40,3 +45,28 @@ Many means of calculating the location of the pressure vector were considered ho
     \caption{Pressure Vector Triangulation}
     \label{fig:PressureVectorTriangulation}
 \end{figure}
+
+\subsection{Charger}
+\begin{figure}[H]
+       \centering
+       \includegraphics[width=0.6\textwidth]{figures/Charger.png}
+       \caption{Battery Charger}
+       \label{fig:ChargerPCB}
+   \end{figure}
+
+
+\subsection{Tail Control Board}
+\begin{figure}[H]
+       \centering
+       \includegraphics[width=0.6\textwidth]{figures/TailControllerBoard.png}
+       \caption{Tail Motor Controller}
+       \label{fig:TailControlBoardPCB}
+   \end{figure}
+   
+\subsection{SPI to RS485 Converter Board}
+\begin{figure}[H]
+       \centering
+       \includegraphics[width=0.6\textwidth]{figures/ConverterBoard.png}
+       \caption{SPI to RS485 Converter}
+       \label{fig:SPItoRS485ConverterPCB}
+   \end{figure}
