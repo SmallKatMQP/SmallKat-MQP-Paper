@@ -53,6 +53,13 @@ Many means of calculating the location of the pressure vector were considered ho
     \caption{Pressure Vector Triangulation}
     \label{fig:PressureVectorTriangulation}
 \end{figure}
+This location in XY is then extrapolated to the position on the foot by calculating its Z location based on the equation of the shere created by the casting. The magnitude of the force can also be calculated by the absolute additional pressure introduced to ste system by finding out the amount of bpressure being applied to all the sensors and removing that from the calculations. essentially finding the minimum pressure that must be applied at each sensor to intersect at that point.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/Footsensordome.png}
+    \caption{3D Pressure Vector Triangulation}
+    \label{fig:3DPressureVectorTriangulation}
+\end{figure}
 
 \subsection{Charger}
 \begin{figure}[H]
@@ -70,6 +77,7 @@ Many means of calculating the location of the pressure vector were considered ho
        \caption{Tail Motor Controller}
        \label{fig:TailControlBoardPCB}
    \end{figure}
+   The intention of this board is to control the 4 Maxon A-Max motors being used to drive the continum tail of the robot. In order to do this the baord must facilitate the homing of the tain, in this case using limit switches, communicate with the motherbaord to reccieve the setpoint of each motor and run all four PID controllers and keep track of the quadrature encoders for each motor, each having 4096 cpr. This board is also being used to power the onboard raspberry pi using an integrated inductor switchmode power supply from TI which is capable of provinding upto 60W of power for the case that another SBC was chosen. 
    
 \subsection{SPI to RS485 Converter Board}
 \begin{figure}[H]
@@ -78,3 +86,13 @@ Many means of calculating the location of the pressure vector were considered ho
        \caption{SPI to RS485 Converter}
        \label{fig:SPItoRS485ConverterPCB}
    \end{figure}
+   After investing over 100 hours of debugging and testing into the daisychained SPI protocol of the motors, it was found that The spi lines were not alo=wasys pulled completely high or completely low due to the number of devisec sharing the same line, this combined witht eh noise that would be developed in the system and the propogation time between the data being passed between devices made the system very unreliable with 4 motors connected in a chain. A single motor would work 100\% of the time, 2 motors would work approximately 80\% of the time and decaying exponentially there after resulting in the fourth motor being extremely unstable and completely unreliable. This led to the decision to change from SPI to RS485. Due to time and cost constraints it was decided to leave the motors in the state they currently existed in and add external communication baords, 1 per motor. These boards would take the SPI signal from the motherbaord, convert it to an RS485 differential signal that would be sent to all the daughter boards that if the message was meant for that board, would then transfer the data to the motors and the motor response back upstream to the master. This conversion proved to be much more stable dropping nearly 0 packets. This however came with a major drawback, the maximum UART speed of the chosen microconterollers (LPC824) was only 1Mbit/sec, this combined with the removal of the synchronous protocol meant the re was an effective data trasmission speed of only 500kbit/sec. Luckily through testing this proved to be a non issue due to the PID controlles being run locally and the update speed of the USB communications being limited by the computer to only 1kHz 
+
+\subsection{Custom BatteryPack}
+\begin{figure}[H]
+       \centering
+       \includegraphics[width=0.6\textwidth]{figures/CustomBatteryPack.jpg}
+       \caption{Custom Spotwelded battery pack}
+       \label{fig:CustomBatteryPack}
+   \end{figure}
+   After a lot of research the route of creating a custom battery pack made of panasonic NCR18650B cells was chosen instead of purchasing a commercially available lithium polimer / lithium ion battery. This decision was made for a numbe of reasons;primarily due to the size and shape constraints of the robot. In order to get a battery pack that would fit in the space we would have to comprimise on capacity. Another reason is in doing research Panasonic NCR18650B cells had one of the highest energy to weight ratios available on the market at 3400mAh at only 44g/cell. This allowed us to create a battery pack with a cumulative 13600mAh of power at a nominal 7.4V. This will allow to robot to operate in a walking state for approximately 1.5 hours.
