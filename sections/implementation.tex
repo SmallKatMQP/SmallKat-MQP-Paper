@@ -29,7 +29,14 @@ To ensure reliability at higher clock speeds both a 32.768 kHz crystal oscillato
    The motherboard was designed and went through one minor and one major, the minor revision was done to remedy an error in the switch mode power supply circuit as well as to change from USB FS to USB HS allowing for a much faster data  through put at up to 48Mb/s.
  	The Major revision was done in order to switch micro controllers to a micro controller package much better suited for the application. Instead of using the 176 pin package of micro controller, the 100 pin variant was capable of performaing the same tasks required. In addition to the change in micro controller, Both available USB ports were broken out and much more safe guarding against inductive spikes affecting the master microcontroller were implimented due to the death of 2 of the previous revision. Thhough many of these changes were very beneficial, the changing of mincrocontrollers came with a single draw back, the loss of 1 SPI channel, meaning some motors were forces to share SPI channels with other devices on therobot. This prevented us offloading the processing of SPI data to the hardware DMA as it had the possibility of cross talk between multiple devices. The breaking out of both USB ports did allow us to take advantage of the processing power and speed of the micro controller. By combining both ports we were effectively able to double our throughput, sending data and requests for different devices through different ports. Using the USB HS ports for motor data and the USB FS port primarily for IMU data requests allowed us to remove the bottle neck of havinf to wait for the data transmission to be completed and allowed us to increase the sample rate of the IMU.
 \subsection{IMU}
-
+\begin{figure}[H]
+       \centering
+       \includegraphics[width=0.6\textwidth]{figures/IMU.png}
+       \caption{IMU Breakout}
+       \label{fig:IMUPCB}
+   \end{figure}
+   The IMU breakout allows a BNO055 IMU to be used as any other device in the system, Using the same communication protocol and simular command IDs as the motors, charger, tail controller and other boards in the system. The board continuously samples the BNO055 IMU for Accelerometer, Gyroscope and Euler angles for heading, roll and pitch and on a request for data responds with all 9 of these data sets from the most recent update.This reduses the data request time for the master controller drastically as this IMU is notorious for clock smeering on i2c and having long delays between samples.
+   
 \subsection{Foot Sensors}
 \begin{figure}[H]
        \centering
