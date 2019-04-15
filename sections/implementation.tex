@@ -68,7 +68,7 @@ This location in XY is then extrapolated to the position on the foot by calculat
        \caption{Battery Charger}
        \label{fig:ChargerPCB}
    \end{figure}
-
+The development of this charging board allows us to fine tune the charge voltage and charge current of the battery back. This baoard also allows us to monitor the battery voltage and prevent over discharging as well as balancing the cells at all times. The voltage is constantly being monitored and reported to the motherboard. This allows the system to stop allowing motor updates at a given voltage cutoff point. This safety feature will help to prevent over draw from the batteries diminhing the available capacity of the pack. The charging current is able to be fine tuned up to 8A using bq24715 charging IC from TI. The charging voltage and current can be updated on the fly through the SMbus interface. The BQ29200 balance charging IC allows for the batteries to be balanced continuoully ensuring the cells never go out of sync, ensuring longevity of the pack.
 
 \subsection{Tail Control Board}
 \begin{figure}[H]
