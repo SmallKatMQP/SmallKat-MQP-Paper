@@ -34,7 +34,20 @@
                 \end{figure}
 
                 After testing the motors, we ultimately decided to take a different approach to a 4-DoF leg: a 3-DoF planar manipulator with a rotation axis in the hip, as depicted in Figure \ref{fig:Planar4DoF}. This would give the platform the capability to change the angle of contact with the ground, potentially improving performance on irregular terrain. This novel leg design, we call a planar 4-DoF Leg, is different from any other quadruped we found in our research. Our initial concern of not having enough speed and power in the motors we selected were taken care of after some testing (see Section \ref{subsubsec:MotorSelection}). However, the main reason we chose 4-DoF legs instead of the 3-DoF variant was the adaptability it gave the users of our platform.
+            
+            \paragraph{Joint Compensation Using Springs/Elastics} \label{par:JointElastics}
+                A design consideration we looked at was to use elastics or springs to counteract the weight of the robot for every limb. Such a design would reduce battery power and increase performance of the motors, since load would be absorbed by the springs.
 
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{figures/SpringVsElastics.png}
+                    \caption{Leg design with extension springs [Left] vs with elastic cords [Right]}
+                    \label{fig:SpringVsElastics}
+                \end{figure}
+
+                There were two major designs looked at: springs and elastic cords. As seen in Figure \ref{fig:SpringVsElastics}, we actually prototyped leg designs using an extension spring and elastic cords. Through our testing, wes found that the elastic cord was more powerful and compact, but the extension springs were more consistent.
+
+                In the end, we discovered our motors were powerful enough to support the weight of the robot while still being able to move around (see Section \ref{par:MotorTesting}). Therefore, we decided against using springs or elastics, since it would complicate the design and the software model.
 
             \paragraph{Head Design}
                 Design decisions for the head were based on two different factors: look and ability to mount sensors. The look itself was taken from previous versions of SmallKats, and was scaled to for the size of the robot. The head is also designed to comfortably hold an Intel RealSense D400 series camera, to allow users to give SmallKat perception capability.
@@ -85,13 +98,23 @@
                     \caption{Pros \& Cons for each motor considered}
                     \label{tab:MotorComparison}
                 \end{table}
-            \paragraph{Motor Testing}
-                We tested the motors... It was fun!
-                We need to include more info on how the motors were tested.... A picture in Figure \ref{fig:MotorTesting} also needs to be added
+            \paragraph{Motor Testing} \label{par:MotorTesting}
+                Once the servo was chosen, we tested the actual torque output of several motors. This was done to confirm the specifications given to us by the supplier as well as to see the difference between motors of the same model. Knowing the motors' limits is crucial when designing the quadruped. We actually ended up not using elastics because the testing performed gave us confidence that the motors would be powerful enough to move the robot.
+                
+                To test our servos we created a laser cut lever arm with holes spaced 1 cm apart. By hanging a 1kg weight on the holes and moving incrementally outward we could determine the actual torque output of the motor. We tested both the stall torques and operational torques.
 
                 \begin{figure}[H]
                     \centering
-                    
+                    \includegraphics[width=0.7\textwidth]{figures/MotorTestingDiagram.png}
+                    \caption{Graphic of how motors were tested}
+                    \label{fig:MotorTestingGraphic}
+                \end{figure}
+
+                The HV-5932MG servos are advertised with a stall torques of 32 kg-cm. We found the servo was able to hold the 1kg weight at the 32 cm however it could not move it which is to be expected given that is its stall torque. From there we moved the weight closer in to determine at what point the servo could comfortably move the weight. We found that 20 kg-cm was the highest torque the servo could operate without any loss of function. Using this number as the known output torque of the motor will allow us to design a system that we are confident will be able to operate without falling down under its own weight.
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{figures/TestingMotors.png}
                     \caption{Testing the Jx-Servo HV-5932MG}
                     \label{fig:MotorTesting}
                 \end{figure}
