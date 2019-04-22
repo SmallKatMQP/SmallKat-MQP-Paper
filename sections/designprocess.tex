@@ -31,8 +31,6 @@
                 The leg design was the most important of decisions when designing SmallKat mechanically. The first decision was to decide how many degrees of freedom our system would have. More degrees would allow for more flexibility and give users more options for gait designs. However, too many degrees of freedom per leg would not only complicate control algorithms, but also increase weight per leg, which would in turn increase rotational and linear inertia, add more strain to the motors, and decrease dynamic gait performance. It is important to note that SmallKat needed at least 3 degrees of freedom to allow for forward and sideways movement, necessary for dynamic walking. Therefore, the decision was between 3 and 4 DoFs.
 
                 Early on in our design process, we spoke to Boston Dynamics (as talked about in Section \ref{subsec:BostonDynamicsInterview}), and one of the questions we asked was their opinion on 3-DoF vs 4-DoF legs. In their research, they saw the design simplicity to be the major benefit of 3-DoF legs, so almost all of their quadrupeds were 3 degrees of freedom; a simpler design means less can go wrong for their customers. However, the engineers did admit they didn't look into different 4-DoF leg designs.
-
-
 % Fix Pictures
                     \begin{figure}[H]
                         \centering
@@ -83,16 +81,25 @@
                     \caption{Pros \& Cons for each motor considered}
                     \label{tab:MotorComparison}
                 \end{table}
+
+            \paragraph{Motor Testing} \label{par:MotorTesting}
+                Once the servo was chosen, we tested the actual torque output of several motors. This was done to confirm the specifications given to us by the supplier as well as to see the difference between motors of the same model. Knowing the motors' limits is crucial when designing the quadruped. We actually ended up not using elastics because the testing performed gave us confidence that the motors would be powerful enough to move the robot.
                 
-                While the Dynamixel motors offer a wide range of additional features the cost required to get the power we needed was way out of our budget. AS a result we sat down to come up with a  solution. The hobby servos provided us with high torque in a small package for a reasonable price. However right off the shelf they offer limited control and feedback. So we decided to create a custom electronics board and add our own sensors to turn the dumb sensors into smart servos that rivaled the Dynamixels for a fraction of the cost. (see Section \ref{\implementation\subsec:Motors})
-                
-            \paragraph{Motor Testing}
-                We tested the motors... It was fun!
-                We need to include more info on how the motors were tested.... A picture in Figure \ref{fig:MotorTesting} also needs to be added
+                To test our servos we created a laser cut lever arm with holes spaced 1 cm apart. By hanging a 1kg weight on the holes and moving incrementally outward we could determine the actual torque output of the motor. We tested both the stall torques and operational torques.
 
                 \begin{figure}[H]
                     \centering
-                    
+                    \includegraphics[width=0.7\textwidth]{figures/MotorTestingDiagram.png}
+                    \caption{Graphic of how motors were tested}
+                    \label{fig:MotorTestingGraphic}
+                \end{figure}
+
+                The HV-5932MG servos are advertised with a stall torques of 32 kg-cm. We found the servo was able to hold the 1kg weight at the 32 cm however it could not move it which is to be expected given that is its stall torque. From there we moved the weight closer in to determine at what point the servo could comfortably move the weight. We found that 20 kg-cm was the highest torque the servo could operate without any loss of function. Using this number as the known output torque of the motor will allow us to design a system that we are confident will be able to operate without falling down under its own weight.
+
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=0.7\textwidth]{figures/TestingMotors.png}
                     \caption{Testing the Jx-Servo HV-5932MG}
                     \label{fig:MotorTesting}
                 \end{figure}
