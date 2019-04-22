@@ -13,61 +13,44 @@
                 \item Able to move leg both forward/backward and sideways
                 \item Powerful and speedy motors that can sustain the weight of the robot
                 \item Head and tail that can be used to shift center of mass of the robot
-                \item Good looking design
+                \item Aesthetically pleasing
             \end{Deliverables}
-        \subsubsection{General Design}
-            The mechanical design of SmallKat was very important, since users will be adapting it to their need, whether that is adding a robot arm or implementing a camera in the head. Therefore, we wanted to design our system to be adaptable and modular.
+            
+         \subsubsection{Mechanical Design Process}
+            The mechanical design of SmallKat was very important. The robot needed to be balanced and designed properly so that the motors would be able to move the whole system and be able to properly walk. It also needed to be designed in a way that was easy to modify or change out components if users wanted to change something or needed to fix a part that had broken. The mechanical design process can be broken down into 6 steps. 
+             \begin{Deliverables}
+                \item 3 DOF vs 4 DOF
+                \item Motor Selection and Testing
+                \item Kinematics and Analysis
+                \item Tail Design and Iterations
+                \item Design Iterations
+                \item Final Design
+            \end{Deliverables}
 
-            \paragraph{Sizing SmallKat}
-                When deciding the size of SmallKat, we looked into the options currently provided on the market, as well as previous versions (talked about in Section \ref{subsec:SmallKatVersions}). Larger robots like Boston Dynamics' BigDog and Spot Mini robots were rather large, and would increase the cost of the robot as a whole. When looking at SmallKat V2, we appreciated its "desktop" size, but realized it's small form factor also limited us in our goals. Since deciding on an exact size was difficult, we decided to size our robot based on a standard servo. This would allow users to swap motors with others that better suit their needs without having to redesign the whole robot. In the end, our robot ended up being slightly larger than a standard house cat. While the robot is still small and relatively nimble, it also has the capability to have advanced sensors, like a 3D RealSense camera, and to traverse paths that the smaller SmallKats couldn't, like stairs.
-
-            \paragraph{Leg Design: 4-DoF vs 3-DoF}
+            \subsubsection{3-DoF vs 4-DoF}
                 The leg design was the most important of decisions when designing SmallKat mechanically. The first decision was to decide how many degrees of freedom our system would have. More degrees would allow for more flexibility and give users more options for gait designs. However, too many degrees of freedom per leg would not only complicate control algorithms, but also increase weight per leg, which would in turn increase rotational and linear inertia, add more strain to the motors, and decrease dynamic gait performance. It is important to note that SmallKat needed at least 3 degrees of freedom to allow for forward and sideways movement, necessary for dynamic walking. Therefore, the decision was between 3 and 4 DoFs.
 
                 Early on in our design process, we spoke to Boston Dynamics (as talked about in Section \ref{subsec:BostonDynamicsInterview}), and one of the questions we asked was their opinion on 3-DoF vs 4-DoF legs. In their research, they saw the design simplicity to be the major benefit of 3-DoF legs, so almost all of their quadrupeds were 3 degrees of freedom; a simpler design means less can go wrong for their customers. However, the engineers did admit they didn't look into different 4-DoF leg designs.
+% Fix Pictures
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{figures/3dof.png}
+                        \caption{Planar 3-DoF Leg Design}
+                        \label{fig:Planar3DoF}
+                    \end{figure}
+                    
+                     \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=0.7\textwidth]{figures/4dof.png}
+                        \caption{Planar 4-DoF Leg Design}
+                        \label{fig:Planar4DoF}
+                    \end{figure}
 
-                \begin{figure}
-                    \centering
-                    MAKE SURE WE INCLUDE A PICTURE
-                    \caption{Planar 4-DoF Leg Design}
-                    \label{fig:Planar4DoF}
-                \end{figure}
-
-                After testing the motors, we ultimately decided to take a different approach to a 4-DoF leg: a 3-DoF planar manipulator with a rotation axis in the hip, as depicted in Figure \ref{fig:Planar4DoF}. This would give the platform the capability to change the angle of contact with the ground, potentially improving performance on irregular terrain. This novel leg design, we call a planar 4-DoF Leg, is different from any other quadruped we found in our research. Our initial concern of not having enough speed and power in the motors we selected were taken care of after some testing (see Section \ref{subsubsec:MotorSelection}). However, the main reason we chose 4-DoF legs instead of the 3-DoF variant was the adaptability it gave the users of our platform.
-            
-            \paragraph{Joint Compensation Using Springs/Elastics} \label{par:JointElastics}
-                A design consideration we looked at was to use elastics or springs to counteract the weight of the robot for every limb. Such a design would reduce battery power and increase performance of the motors, since load would be absorbed by the springs.
-
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=0.7\textwidth]{figures/SpringVsElastics.png}
-                    \caption{Leg design with extension springs [Left] vs with elastic cords [Right]}
-                    \label{fig:SpringVsElastics}
-                \end{figure}
-
-                There were two major designs looked at: springs and elastic cords. As seen in Figure \ref{fig:SpringVsElastics}, we actually prototyped leg designs using an extension spring and elastic cords. Through our testing, wes found that the elastic cord was more powerful and compact, but the extension springs were more consistent.
-
-                In the end, we discovered our motors were powerful enough to support the weight of the robot while still being able to move around (see Section \ref{par:MotorTesting}). Therefore, we decided against using springs or elastics, since it would complicate the design and the software model.
-
-            \paragraph{Head Design}
-                Design decisions for the head were based on two different factors: look and ability to mount sensors. The look itself was taken from previous versions of SmallKats, and was scaled to for the size of the robot. The head is also designed to comfortably hold an Intel RealSense D400 series camera, to allow users to give SmallKat perception capability.
-
-            \paragraph{Tail Design}
-                When looking at other quadrupeds, tails are often not used, as they add complexity in the design. However, we saw a tail as an opportunity to better control our center of mass of the robot. This would give the user more body control, and could be removed if needed. We ultimately looked at two different designs for the tail: a solid tail and a continuum tail. A solid tail has articulation at the base of the tail, and is relatively simple to control. All normal kinematics and dynamics apply to model the movement of the tail, and modeling the system is relatively straight forward. Users can use a solid tail to move a mass left and right to control the center of mass of the robot as a whole.
-
-                Continuum tails, on the other hand, are a series of linkages that are controlled by pulling on a string running through the linkages, similar to how fingers work in a hand. Motion is determined by how much actuators pull on the three or more strings built into the linkage. Modeling continuum tails is significantly more difficult, since every linkage has to be modeled as its own joint and link, complicating the system. However, users have some more control over the center of mass of the tail, especially if you stack continuum manipulators on top of one another.
-
-                In order to give users an option, both a continuum tail and a solid tail were developed, and can be swapped out to simulate different situations. Figure \ref{fig:TailComparison} shows the difference between a solid and a continuum tail.
+                After some deliberation and research, we ultimately decided to take a different approach to a 4-DoF leg: a 3-DoF planar manipulator with a rotation axis in the hip, as depicted in Figure \ref{fig:Planar4DoF}. This would give the platform the capability to change the angle of contact with the ground, potentially improving performance on irregular terrain. This novel leg design, we call a planar 4-DoF Leg, is different from any other quadruped we found in our research. Our initial concern of not having enough speed and power in the motors we selected were taken care of after some testing (see Section \ref{subsubsec:MotorSelection}). However, the main reason we chose 4-DoF legs instead of the 3-DoF variant was the adaptability it gave the users of our platform. Additionally because it has not been done before in any of the quadrupedal robot systems we have found it offered a unique opportunity to research the difference between 3 DOF and 4 DOF systems. 
                 
-                \begin{figure}[H]
-                    \centering
-
-                    \caption{SmallKat's Solid Tail [Left] vs Continuum Tail [Right]}
-                    \label{fig:TailComparison}
-                \end{figure}
-
-        \subsubsection{Motor Selection}\label{subsubsec:MotorSelection}
-        We considered many different motor solutions for this project, including standard hobby servos, planetary geared motors, and "smart" motors from companies like Dynamixel and Maxon. Our decision - standard hobby servos - was mostly based on the selection and standard that has been formed in the hobby industry. If a user wanted to replace their motors with weaker or more powerful version, he or she could, assuming the servo they purchase are the same size as the ones we designed around. This gives the users the option of motors to use based on their needs and budget.
+\subsubsection{Motor Selection}\label{subsubsec:MotorSelection}
+        One of the most important parts of any robot is it's motors. We considered many different motor solutions for this project, including standard hobby servos, planetary geared motors, and "smart" motors from companies like Dynamixel and Maxon. Our decision - standard hobby servos - was mostly based on the selection and standard that has been formed in the hobby industry. If a user wanted to replace their motors with weaker or more powerful version, he or she could, assuming the servo they purchase are the same size as the ones we designed around. This gives the users the option of motors to use based on their needs and budget. 
+        
             \paragraph{Motor Options}
             Based on the size, we found a few options of different motors we can use. These include a standard (modified) hobby servo (Jx-Servo HV-5932MG) and 2 Dynamixel motors. Table \ref{tab:MotorComparison} lists the pros and cons for each option we considered.
 
@@ -98,6 +81,7 @@
                     \caption{Pros \& Cons for each motor considered}
                     \label{tab:MotorComparison}
                 \end{table}
+
             \paragraph{Motor Testing} \label{par:MotorTesting}
                 Once the servo was chosen, we tested the actual torque output of several motors. This was done to confirm the specifications given to us by the supplier as well as to see the difference between motors of the same model. Knowing the motors' limits is crucial when designing the quadruped. We actually ended up not using elastics because the testing performed gave us confidence that the motors would be powerful enough to move the robot.
                 
@@ -112,12 +96,35 @@
 
                 The HV-5932MG servos are advertised with a stall torques of 32 kg-cm. We found the servo was able to hold the 1kg weight at the 32 cm however it could not move it which is to be expected given that is its stall torque. From there we moved the weight closer in to determine at what point the servo could comfortably move the weight. We found that 20 kg-cm was the highest torque the servo could operate without any loss of function. Using this number as the known output torque of the motor will allow us to design a system that we are confident will be able to operate without falling down under its own weight.
 
+
                 \begin{figure}[H]
                     \centering
                     \includegraphics[width=0.7\textwidth]{figures/TestingMotors.png}
                     \caption{Testing the Jx-Servo HV-5932MG}
                     \label{fig:MotorTesting}
                 \end{figure}
+
+            \paragraph{Sizing SmallKat}
+                When deciding the size of SmallKat, we looked into the options currently provided on the market, as well as previous versions (talked about in Section \ref{subsec:SmallKatVersions}). Larger robots like Boston Dynamics' BigDog and Spot Mini robots were rather large, and would increase the cost of the robot as a whole. When looking at SmallKat V2, we appreciated its "desktop" size, but realized it's small form factor also limited us in our goals. Since deciding on an exact size was difficult, we decided to size our robot based on a standard servo. This would allow users to swap motors with others that better suit their needs without having to redesign the whole robot. In the end, our robot ended up being slightly larger than a standard house cat. While the robot is still small and relatively nimble, it also has the capability to have advanced sensors, like a 3D RealSense camera, and to traverse paths that the smaller SmallKats couldn't, like stairs.
+
+            \paragraph{Head Design}
+                Design decisions for the head were based on two different factors: look and ability to mount sensors. The look itself was taken from previous versions of SmallKats, and was scaled to for the size of the robot. The head is also designed to comfortably hold an Intel RealSense D400 series camera, to allow users to give SmallKat perception capability.
+
+            \paragraph{Tail Design}
+                When looking at other quadrupeds, tails are often not used, as they add complexity in the design. However, we saw a tail as an opportunity to better control our center of mass of the robot. This would give the user more body control, and could be removed if needed. We ultimately looked at two different designs for the tail: a solid tail and a continuum tail. A solid tail has articulation at the base of the tail, and is relatively simple to control. All normal kinematics and dynamics apply to model the movement of the tail, and modeling the system is relatively straight forward. Users can use a solid tail to move a mass left and right to control the center of mass of the robot as a whole.
+
+                Continuum tails, on the other hand, are a series of linkages that are controlled by pulling on a string running through the linkages, similar to how fingers work in a hand. Motion is determined by how much actuators pull on the three or more strings built into the linkage. Modeling continuum tails is significantly more difficult, since every linkage has to be modeled as its own joint and link, complicating the system. However, users have some more control over the center of mass of the tail, especially if you stack continuum manipulators on top of one another.
+
+                In order to give users an option, both a continuum tail and a solid tail were developed, and can be swapped out to simulate different situations. Figure \ref{fig:TailComparison} shows the difference between a solid and a continuum tail.
+                
+                \begin{figure}[H]
+                    \centering
+
+                    \caption{SmallKat's Solid Tail [Left] vs Continuum Tail [Right]}
+                    \label{fig:TailComparison}
+                \end{figure}
+
+        
     
     \subsection{Electronics}
 
