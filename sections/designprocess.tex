@@ -45,7 +45,7 @@
                     \label{fig:4DoFDesign}
                 \end{figure}
                 
-            After some deliberation and research, we ultimately decided to take a different approach to a 4-DoF leg: a 3-DoF planar manipulator with a rotation axis in the hip, as depicted in Figure \ref{fig:Planar4DoF}. This would give the platform the capability to change the angle of contact with the ground, potentially improving performance on irregular terrain. This novel leg design, we call a planar 4-DoF Leg, is different from any other quadruped we found in our research. Our initial concern of not having enough speed and power in the motors we selected were taken care of after some testing (see Section \ref{subsubsec:MotorSelection}). However, the main reason we chose 4-DoF legs instead of the 3-DoF variant was the adaptability it gave the users of our platform. Additionally because it has not been done before in any of the quadrupedal robot systems we have found it offered a unique opportunity to research the difference between 3 DOF and 4 DOF systems. 
+            After some deliberation and research, we ultimately decided to take a different approach to a 4-DoF leg: a 3-DoF planar manipulator with a rotation axis in the hip, as depicted in Figure \ref{fig:4DoFDesign}. This would give the platform the capability to change the angle of contact with the ground, potentially improving performance on irregular terrain. This novel leg design, we call a planar 4-DoF Leg, is different from any other quadruped we found in our research. Our initial concern of not having enough speed and power in the motors we selected were taken care of after some testing (see Section \ref{subsubsec:MotorSelection}). However, the main reason we chose 4-DoF legs instead of the 3-DoF variant was the adaptability it gave the users of our platform. Additionally because it has not been done before in any of the quadrupedal robot systems we have found it offered a unique opportunity to research the difference between 3 DOF and 4 DOF systems. 
             
         \subsubsection{Motor Selection and Testing}\label{subsubsec:MotorSelection}
         One of the most important parts of any robot is it's motors. We considered many different motor solutions for this project, including standard hobby servos, planetary geared motors, and "smart" motors from companies like Dynamixel and Maxon. Our decision - standard hobby servos - was mostly based on the selection and standard that has been formed in the hobby industry. If a user wanted to replace their motors with weaker or more powerful version, he or she could, assuming the servo they purchase are the same size as the ones we designed around. This gives the users the option of motors to use based on their needs and budget. 
@@ -106,7 +106,7 @@
                         \hline
                     \end{tabular}
                     \caption{Spring Test:  Tested bungee cords to determine the spring constant value}
-                    \label{tab:MotorComparison}
+                    \label{tab:MotorTesting}
                 \end{table}
 
                 Our tests weren't perfect but they gave us a rough idea of what to expect for the spring constant of our elastics. Using this info we figured we could make a rough controller for the system and refine it once we had better tests using the motors. However, we actually ended up not using elastics because the results of the motor testing proved that the motors would be powerful enough to move the robot.
@@ -343,9 +343,9 @@
             \paragraph{Micro-controller to Computer}
             There were many fewer options for communicating between a computer and the master micro controller. The major solutions included Ethernet, USB HID and uart over USB. These options each have their advantages and disadvantages. Ethernet, this requires external supporting circuitry to interface between the micro controller and computer, this combined with the priority level of the networking stack on any Debian distribution of Linux including Ubuntu eliminated this option as a viable solution. Usart over USB was a viable option as the USB communication stack is marginally higher than the networking stack however usb to Usart is limited to \~2 Mbits/s. This meant that the throughput would not be enough for the robot to function reliably. USB HID communicates a 54 kbyte packet, reliably at 1ms. The HID USB stack is also the communication stack with the highest priority in any Debian based Linux system. therefore it is the least likely to lose a packet or have a data transmission error. 
 
-    
     \subsection{High Level Software: Robot Kernel}
-        The kernel's main job will be to run the kinematics and dynamics engine. This includes balancing, foot-step planning, and all gaits to be developed (see gait section). To speed up development time and decrease cycle-times in certain calculations, an existing platform should ideally be used. The ideal platform has the following criteria:
+        The kernel's main job will be to run the kinematics and dynamics engine. This includes balancing, foot-step planning, and all gaits to be developed (see gait section). To speed up development time and decrease cycle-times in certain calculations, an existing platform should ideally be used.
+        \subsubsection{Requirements}
         \begin{enumerate}
             \item Real-time performance with a guaranteed cycle time of under 1ms 90\% of the time (not including communication time with the Motherboard)
             \item Able to be interface with the communication protocols to be used
