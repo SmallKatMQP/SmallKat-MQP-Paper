@@ -83,13 +83,13 @@
             \paragraph{Motor Decision}
                 Ultimately we decided to use the Hobby Servo. While the Dynamixel servos provided an all in one solution to the sensor integration and feedback we were looking for in our motors, the price for the amount of power we needed was way out of our budget. As a result we needed to come up with an alternative solution for providing feedback to our system. While we could have just added external sensors to our motors and joints, we decided to modify the servos to suit our needs. This was also part of our decision to choose the hobby servos, because after some research and thinking we discovered that we could fit our own electronics board and housing on the servos to essentially turn them into the smart Dynamixel servos for a fraction of the cost. The design of the servo electronics board is covered in more depth in the electrical implementation section of this paper.
                 
-            \paragraph{Elastics Testing} 0o[h]
+            \paragraph{Elastics Testing}
 
                 Once we had decided on a servo we had a rough idea of the size of the robot we were intending to create. Based on this conceptual size and weight and the size and power of our servos,  we felt that there was a possibility that an elastic suspension system would be needed to allow the robot to function properly. This system would work by attaching a spring or bungee cord or other elastic mechanism to the joints of the cat. When the cat is under its own weight the elastics work to reduce the amount of torque seen by the motor. Because most elastic systems are dependent on the distance they are compressed or extended by the farther the limb is moved the more additional torque is applied. One thing to keep in mind is that when the robot has lifted up the leg and is no longer under its own weight the elastic systems are now working against the motor. This means that however much additional assistance is applied by the springs, it can not be greater than the max torque output of the motor.  In order to get an idea of the spring constants available we purchased a length of ¼ bungee cord to test. The test was done by suspending a length of bungee cord from the top of a table and hanging weights on it to determine how far it stretches.  Given that Hooke's law is F = k*x where k is the spring constant and x is a linear distance we can easily determine the value of the spring constant. 
 	
 	            \begin{figure}[H]
                     \centering
-                    \includegraphics[width=0.7\textwidth]{figures/Spring testing.jpg}
+                    \includegraphics[width=0.7\textwidth]{figures/Springtesting.jpg}
                     \caption{Elastics Testing}
                     \label{fig:ElasticsTestingGraphic}
                 \end{figure}
@@ -106,7 +106,7 @@
                         \hline
                     \end{tabular}
                     \caption{Spring Test:  Tested bungee cords to determine the spring constant value}
-                    \label{tab:MotorComparison}
+                    \label{tab:MotorResults}
                 \end{table}
 
                 Our tests weren't perfect but they gave us a rough idea of what to expect for the spring constant of our elastics. Using this info we figured we could make a rough controller for the system and refine it once we had better tests using the motors. However, we actually ended up not using elastics because the results of the motor testing proved that the motors would be powerful enough to move the robot.
@@ -143,7 +143,7 @@
                     \label{fig:4dofkinematics}
                 \end{figure}  
                 
-             \paragraph{Force Propagation} 
+             \paragraph{Force Propagation} Once the D-H parameters, forward and inverse kinematics of the system are established you can start getting into more complicated math to analyze the system. One such analysis is called force propagation. Essentially this allows us to apply a simulated force on the end-effector of our robot and calculate what each of the torques on the links are by propagation that force through each limb of the leg. This is extremly useful as it allows us to get a rough estimation of what the torques on each of the 
                 
             % add in pictures of 4 dof vs 3 dof kinematics
             % talk about jacobian and force propogation
