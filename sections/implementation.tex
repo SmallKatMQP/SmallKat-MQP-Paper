@@ -1,7 +1,8 @@
 \section{Development and Implementation}
-        \paragraph{} Based on our research and testing we decided to make advancements in what is considered the typical quadrupedal design. We set out to creating a system that more closely resembles a cat by implementing 4 DOF legs and a continuum tail. Our electronic systems will include pressure sensing feet with multiple sensors to allow for the triangulation of the pressure vectors, an adaptive number of IMUs which can be placed in optimal locations and custom smart servo motors capable of performing constant position, velocity and torque. We will be creating custom control systems that will allow us to implement a variety of gaits. We hope to be able to at least create a basic walking and running gait and experiment with jumping.
+       
 
 \subsection{Mechanical}
+ Based on our research and testing we decided to make advancements in what is considered the typical quadrupedal design. We set out to creating a system that more closely resembles a cat by implementing 4 DOF legs and a continuum tail. Our electronic systems will include pressure sensing feet with multiple sensors to allow for the triangulation of the pressure vectors, an adaptive number of IMUs which can be placed in optimal locations and custom smart servo motors capable of performing constant position, velocity and torque. We will be creating custom control systems that will allow us to implement a variety of gaits. We hope to be able to at least create a basic walking and running gait and experiment with jumping.
 
         \subsubsection{Tail Design}
             When looking at other quadrupeds, tails are often not used, as they add complexity in the design. However, we saw a tail as an opportunity to better control our center of mass of the robot. This would give the user more body control, and could be removed if needed. We ultimately looked at two different designs for the tail: a solid tail and a continuum tail. A solid tail has articulation at the base of the tail, and is relatively simple to control. All normal kinematics and dynamics apply to model the movement of the tail, and modeling the system is relatively straight forward. Users can use a solid tail to move a mass left and right to control the center of mass of the robot as a whole. Modeling continuum tails is significantly more difficult, since every linkage has to be modeled as its own joint and link, complicating the system. However, users have some more control over the center of mass of the tail, especially if you stack continuum manipulators on top of one another. In order to give users an option, both a continuum tail and a solid tail were developed, and can be swapped out to simulate different situations. Figure \ref{fig:TailComparison} shows the difference between a solid and a continuum tail.
@@ -275,7 +276,7 @@
         \end{figure}
 
         \paragraph{Motor Controllers}
-            When the motor receives a packet it checks if the first byte if the packet and compares it to the Dev ID of the motor. If the device Id does not match the first byte of the packet it is stages for transmission on the next packet received. If the packet is used to update that motor, the second byte of the packet is checked and compared to different known options. 
+            When the motor receives a packet it checks if the first byte if the packet and compares it to the device ID of the motor. If the device Id does not match the first byte of the packet it is stages for transmission on the next packet received. If the packet is used to update that motor, the second byte of the packet is checked and compared to different known options. 
             \begin{table}[H]
                 \centering
                 \begin{tabular}{|c|c|}
@@ -286,9 +287,9 @@
                     0x47 & Updates Position PID constants based on bytes 3,4,5 of the packet \\
                     0x48 & Updates Velocity PID constants based on bytes 3,4,5 of the packet \\
                     0x49 & Updates Torque PID constants based on bytes 3,4,5 of the packet \\
-                    0x91 & Updated position setpoint in Postion PID loop\\
-                    0x92 & Updated position setpoint in Velocity PID loop\\
-                    0x93 & Updated position setpoint in Torque PID loop\\
+                    0x91 & Updated position set point in Position PID loop\\
+                    0x92 & Updated position set point in Velocity PID loop\\
+                    0x93 & Updated position set point in Torque PID loop\\
                     \hline
                     \end{tabular}
                 \caption{Command values for motors}
@@ -344,7 +345,7 @@ The custom servo motors posed a very interesting challenge when it came to size 
        \caption{Motor controller PCB top}
        \label{fig:MotorControllerPCBTop}
    \end{figure}
-The boards were designed to be assembled directly into the motor connected directly by the motor pins, aligning the encoder above the magnet connected directly to the output shaft of the motor. The programming header was designed as a series of pads that can be used in combination with a pogo pin programming jig, meaning that the firmware can be updated quickly and easily. 
+The boards were designed to be assembled directly into the motor connected directly by the motor pins, aligning the encoder above the magnet connected directly to the output shaft of the motor. The programming header was designed as a series of pads that can be used in combination with a Pogo pin programming jig, meaning that the firmware can be updated quickly and easily. 
 \subsubsection{Motherboard}
 The mother board was developed to be a stand alone micro controller using the STM32H743vit6 micro controller running at 400 MHz. Broken out from this micro controller were all 6 SPI channels, 12 GPIO pins, UART, USB HS and a programming header. In order to limit the number of traces interfering with the High power  coming from the battery, 3.3v and the Ground Plane a 4 layer board was chosen despite the increased cost of production. This meant that all the signal traces could be run internally allowing for a continuous trace running around the periphery of the board connecting all of the connectors to the 8.4v supply coming in from the battery.
 \begin{figure}[H]
@@ -356,20 +357,20 @@ The mother board was developed to be a stand alone micro controller using the ST
 To ensure reliability at higher clock speeds both a 32.768 kHz crystal oscillator and a 32MHz crystal oscillator were used. While developing the firmware for the motherboard the the clock speed was reduced from 400MHZ to 384 MHz in order to optimize the speed at which the SPI could be run as a clock divisible by 24MHz was requires to take full advantage of the SPI communication with the micro controllers on the motors. In order to have a reliable and stable 3.3v rail for the micro controller, 2 switch mode buck converter power supplies were used in order to stop regulate the 5v supply from USB and the 8.4v supply from the battery pack. This allows the board to be developed on and tested using only power from the USB connection and does not require the battery be connected. 
   
    The motherboard was designed and went through one minor and one major, the minor revision was done to remedy an error in the switch mode power supply circuit as well as to change from USB FS to USB HS allowing for a much faster data  through put at up to 480Mb/s.
- 	The Major revision was done in order to switch micro controllers to a micro controller package much better suited for the application. Instead of using the 176 pin package of micro controller, the 100 pin variant was capable of performaing the same tasks required. In addition to the change in micro controller, Both available USB ports were broken out and much more safe guarding against inductive spikes affecting the master microcontroller were implimented due to the death of 2 of the previous revision. Thhough many of these changes were very beneficial, the changing of mincrocontrollers came with a single draw back, the loss of 1 SPI channel, meaning some motors were forces to share SPI channels with other devices on therobot. This prevented us offloading the processing of SPI data to the hardware DMA as it had the possibility of cross talk between multiple devices. The breaking out of both USB ports did allow us to take advantage of the processing power and speed of the micro controller. By combining both ports we were effectively able to double our throughput, sending data and requests for different devices through different ports. Using the USB HS ports for motor data and the USB FS port primarily for IMU data requests allowed us to remove the bottle neck of havinf to wait for the data transmission to be completed and allowed us to increase the sample rate of the IMU.
+ 	The Major revision was done in order to switch micro controllers to a micro controller package much better suited for the application. Instead of using the 176 pin package of micro controller, the 100 pin variant was capable of performing the same tasks required. In addition to the change in micro controller, Both available USB ports were broken out and much more safe guarding against inductive spikes affecting the master micro controller were implemented due to the death of 2 of the previous revision. Though many of these changes were very beneficial, the changing of microcontrollers came with a single draw back, the loss of 1 SPI channel, meaning some motors were forces to share SPI channels with other devices on the robot. This prevented us offloading the processing of SPI data to the hardware DMA as it had the possibility of cross talk between multiple devices. The breaking out of both USB ports did allow us to take advantage of the processing power and speed of the micro controller. By combining both ports we were effectively able to double our throughput, sending data and requests for different devices through different ports. Using the USB HS ports for motor data and the USB FS port primarily for IMU data requests allowed us to remove the bottle neck of having to wait for the data transmission to be completed and allowed us to increase the sample rate of the IMU.
 \subsubsection{IMU}
 \begin{figure}[H]
        \centering
-       \includegraphics[width=0.6\textwidth]{figures/IMU.png}
+       \includegraphics[width=0.5\textwidth]{figures/IMU.png}
        \caption{IMU Breakout}
        \label{fig:IMUPCB}
    \end{figure}
-   The IMU breakout allows a BNO055 IMU to be used as any other device in the system, Using the same communication protocol and simular command IDs as the motors, charger, tail controller and other boards in the system. The board continuously samples the BNO055 IMU for Accelerometer, Gyroscope and Euler angles for heading, roll and pitch and on a request for data responds with all 9 of these data sets from the most recent update.This reduses the data request time for the master controller drastically as this IMU is notorious for clock smeering on i2c and having long delays between samples.
+   The IMU breakout allows a BNO055 IMU to be used as any other device in the system, Using the same communication protocol and similar command IDs as the motors, charger, tail controller and other boards in the system. The board continuously samples the BNO055 IMU for Accelerometer, Gyroscope and Euler angles for heading, roll and pitch and on a request for data responds with all 9 of these data sets from the most recent update.This reduces the data request time for the master controller drastically as this IMU is notorious for clock smearing on i2c and having long delays between samples.
    
 \subsubsection{Foot Sensors}
 \begin{figure}[H]
        \centering
-       \includegraphics[width=0.6\textwidth]{figures/FootSensor.png}
+       \includegraphics[width=0.5\textwidth]{figures/FootSensor.png}
        \caption{Foot Sensor}
        \label{fig:FootSensorPCB}
    \end{figure}
@@ -382,7 +383,7 @@ Many means of calculating the location of the pressure vector were considered ho
     \caption{Pressure Vector Triangulation}
     \label{fig:PressureVectorTriangulation}
 \end{figure}
-This location in XY is then extrapolated to the position on the foot by calculating its Z location based on the equation of the shere created by the casting. The magnitude of the force can also be calculated by the absolute additional pressure introduced to ste system by finding out the amount of bpressure being applied to all the sensors and removing that from the calculations. essentially finding the minimum pressure that must be applied at each sensor to intersect at that point.
+This location in XY is then extrapolated to the position on the foot by calculating its Z location based on the equation of the sheer created by the casting. The magnitude of the force can also be calculated by the absolute additional pressure introduced to the system by finding out the amount of pressure being applied to all the sensors and removing that from the calculations. essentially finding the minimum pressure that must be applied at each sensor to intersect at that point.
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{figures/Footsensordome.png}
@@ -393,47 +394,47 @@ This location in XY is then extrapolated to the position on the foot by calculat
 \subsubsection{Charger}
 \begin{figure}[H]
        \centering
-       \includegraphics[width=0.6\textwidth]{figures/Charger.png}
+       \includegraphics[width=0.5\textwidth]{figures/Charger.png}
        \caption{Battery Charger}
        \label{fig:ChargerPCB}
    \end{figure}
-The development of this charging board allows us to fine tune the charge voltage and charge current of the battery back. This baoard also allows us to monitor the battery voltage and prevent over discharging as well as balancing the cells at all times. The voltage is constantly being monitored and reported to the motherboard. This allows the system to stop allowing motor updates at a given voltage cutoff point. This safety feature will help to prevent over draw from the batteries diminhing the available capacity of the pack. The charging current is able to be fine tuned up to 8A using bq24715 charging IC from TI. The charging voltage and current can be updated on the fly through the SMbus interface. The BQ29200 balance charging IC allows for the batteries to be balanced continuoully ensuring the cells never go out of sync, ensuring longevity of the pack.
+The development of this charging board allows us to fine tune the charge voltage and charge current of the battery back. This board also allows us to monitor the battery voltage and prevent over discharging as well as balancing the cells at all times. The voltage is constantly being monitored and reported to the motherboard. This allows the system to stop allowing motor updates at a given voltage cutoff point. This safety feature will help to prevent over draw from the batteries diminishing the available capacity of the pack. The charging current is able to be fine tuned up to 8A using BQ24715 charging IC from TI. The charging voltage and current can be updated on the fly through the SMbus interface. The BQ29200 balance charging IC allows for the batteries to be balanced continually ensuring the cells never go out of sync, ensuring longevity of the pack.
 
 \subsubsection{Tail Control Board}
 \begin{figure}[H]
        \centering
-       \includegraphics[width=0.6\textwidth]{figures/TailControllerBoard.png}
+       \includegraphics[width=0.5\textwidth]{figures/TailControllerBoard.png}
        \caption{Tail Motor Controller}
        \label{fig:TailControlBoardPCB}
    \end{figure}
-   The intention of this board is to control the 4 Maxon A-Max motors being used to drive the continuum tail of the robot. In order to do this the board must facilitate the homing of the tail, in this case using limit switches, communicate with the motherboard to receive the setpoint of each motor and run all four PID controllers and keep track of the quadrature encoders for each motor, each having 4096 counts per revolution. This board is also being used to power the on board raspberry pi using an integrated inductor switchmode power supply from TI which is capable of providing up to 60W of power for the case that another SBC was chosen. 
+   The intention of this board is to control the 4 Maxon A-Max motors being used to drive the continuum tail of the robot. In order to do this the board must facilitate the homing of the tail, in this case using limit switches, communicate with the motherboard to receive the set point of each motor and run all four PID controllers and keep track of the quadrature encoders for each motor, each having 4096 counts per revolution. This board is also being used to power the on board raspberry pi using an integrated inductor switch mode power supply from TI which is capable of providing up to 60W of power for the case that another SBC was chosen. 
    
 \subsubsection{SPI to RS485 Converter Board}
 \begin{figure}[H]
        \centering
-       \includegraphics[width=0.6\textwidth]{figures/ConverterBoard.png}
+       \includegraphics[width=0.5\textwidth]{figures/ConverterBoard.png}
        \caption{SPI to RS485 Converter}
        \label{fig:SPItoRS485ConverterPCB}
    \end{figure}
-   After investing over 100 hours of debugging and testing into the daisy chained SPI protocol of the motors, it was found that The SPI lines were not always pulled completely high or completely low due to the number of devices sharing the same line, this combined with the noise that would be developed in the system and the propagation time between the data being passed between devices made the system very unreliable with 4 motors connected in a chain. A single motor would work 100\% of the time, 2 motors would work approximately 80\% of the time and decaying exponentially there after resulting in the fourth motor being extremely unstable and completely unreliable. This led to the decision to change from SPI to RS485. Due to time and cost constraints it was decided to leave the motors in the state they currently existed in and add external communication boards, 1 per motor. These boards would take the SPI signal from the motherboard, convert it to an RS485 differential signal that would be sent to all the daughter boards that if the message was meant for that board, would then transfer the data to the motors and the motor response back upstream to the master. This conversion proved to be much more stable dropping nearly 0 packets. This however came with a major drawback, the maximum UART speed of the chosen microcontrollers (LPC824) was only 1Mbit/sec, this combined with the removal of the synchronous protocol meant the re was an effective data trasmission speed of only 500kbit/sec. Luckily through testing this proved to be a non issue due to the PID controllers being run locally and the update speed of the USB communications being limited by the computer to only 1kHz 
+   After investing over 100 hours of debugging and testing into the daisy chained SPI protocol of the motors, it was found that The SPI lines were not always pulled completely high or completely low due to the number of devices sharing the same line, this combined with the noise that would be developed in the system and the propagation time between the data being passed between devices made the system very unreliable with 4 motors connected in a chain. A single motor would work 100\% of the time, 2 motors would work approximately 80\% of the time and decaying exponentially there after resulting in the fourth motor being extremely unstable and completely unreliable. This led to the decision to change from SPI to RS485. Due to time and cost constraints it was decided to leave the motors in the state they currently existed in and add external communication boards, 1 per motor. These boards would take the SPI signal from the motherboard, convert it to an RS485 differential signal that would be sent to all the daughter boards that if the message was meant for that board, would then transfer the data to the motors and the motor response back upstream to the master. This conversion proved to be much more stable dropping nearly 0 packets. This however came with a major drawback, the maximum UART speed of the chosen microcontrollers (LPC824) was only 1Mbit/sec, this combined with the removal of the synchronous protocol meant the re was an effective data transmission speed of only 500kbit/sec. Luckily through testing this proved to be a non issue due to the PID controllers being run locally and the update speed of the USB communications being limited by the computer to only 1kHz 
 
-\subsubsection{Custom BatteryPack}
+\subsubsection{Custom Battery Pack}
 \begin{figure}[H]
        \centering
-       \includegraphics[width=0.6\textwidth]{figures/CustomBatteryPack.jpg}
-       \caption{Custom Spotwelded battery pack}
+       \includegraphics[width=0.4\textwidth]{figures/CustomBatteryPack.jpg}
+       \caption{Custom Spot welded battery pack}
        \label{fig:CustomBatteryPack}
    \end{figure}
-   After a lot of research the route of creating a custom battery pack made of panasonic NCR18650B cells was chosen instead of purchasing a commercially available lithium polymer / lithium ion battery. This decision was made for a numbe of reasons;primarily due to the size and shape constraints of the robot. In order to get a battery pack that would fit in the space we would have to compromise on capacity. Another reason is in doing research Panasonic NCR18650B cells had one of the highest energy to weight ratios available on the market at 3400mAh at only 44g/cell. This allowed us to create a battery pack with a cumulative 13600mAh of power at a nominal 7.4V. This will allow to robot to operate in a walking state for approximately 1.5 hours.
+   After a lot of research the route of creating a custom battery pack made of Panasonic NCR18650B cells was chosen instead of purchasing a commercially available lithium polymer / lithium ion battery. This decision was made for a number of reasons;primarily due to the size and shape constraints of the robot. In order to get a battery pack that would fit in the space we would have to compromise on capacity. Another reason is in doing research Panasonic NCR18650B cells had one of the highest energy to weight ratios available on the market at 3400mAh at only 44g/cell. This allowed us to create a battery pack with a cumulative 13600mAh of power at a nominal 7.4V. This will allow to robot to operate in a walking state for approximately 1.5 hours.
 
 \subsection{Software}
     As stated in Section \ref{subsec: Software}, the software platform chosen was Bowler Kernel, due to its familiarity and visualization capability. During development, we implemented and used a visualization tool to simplify graphics computation on the development machines and to visualize joint limits and DH parameters on the robot. When it came to running a headless system, we also switched from an Odroid XU4 to a Raspberry Pi 3 B+, due to limitations by Bowler Kernel. 
     
     \subsubsection{Visualization Simplification}
-        When developing software, our team quickly figured out that rendering our complex CAD model for visualization would unnecessarily put computational strain on our computers. Therefore, we implemented a visualization tool that would allow us to look at the constraints of the robot. This included DH parameters, joint limits, and ...
+        When developing software, our team quickly figured out that rendering our complex CAD model for visualization would unnecessarily put computational strain on our computers. Therefore, we implemented a visualization tool that would allow us to look at the constraints of the robot. This included DH parameters, joint limits, and
         \begin{figure}
             \centering
-            \includegraphics{figures/BowlerVis.png}
+       \includegraphics[width=0.5\textwidth]{figures/BowlerVis.png}
             \caption{The Implemented Visualization Tool}
             \label{fig:VisualizationTool}
         \end{figure}
@@ -446,7 +447,7 @@ The development of this charging board allows us to fine tune the charge voltage
         IHMC's library set is a very powerful tool for walking robotics. It includes libraries for dynamic modeling, walking gaits, and simulation for development. The library set has successfully been used on robots including Boston Dynamics' ATLAS and NASA's Valkyrie Humanoid, and was very promising. However, documentation and support quickly became an issue, since the libraries were just beginning to be released and documentation had yet to be published. We did attempt to develop our software with this system, but it became clear that moving forward would become increasingly more difficult with less and less documentation. However, Figure \ref{fig:IHMCImplementation} shows our simulation environment we created to test our code.
         \begin{figure}
             \centering
-            \includegraphics{figures/IHMCImplementation.png}
+           \includegraphics[width=0.5\textwidth]{figures/IHMCImplementation.png}
             \caption{Our IHMC Implementation}
             \label{fig:IHMCImplementation}
         \end{figure}
